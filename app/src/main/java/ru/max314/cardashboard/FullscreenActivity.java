@@ -174,7 +174,7 @@ public class FullscreenActivity extends Activity {
                 .target(loc)
                 .zoom(modelData.getCurrentZoom())
                 .bearing(location.getBearing())
-                .tilt(30)
+                //.tilt(30)
                 .build();
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
