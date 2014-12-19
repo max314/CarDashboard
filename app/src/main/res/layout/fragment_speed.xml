@@ -139,9 +139,9 @@
                 />
             <TextView
                 android:id="@+id/frSpeedTripOwn"
-                android:layout_width="70dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:text="899.8"
+                android:text="1899.8"
                 android:textColor="@android:color/black"
                 android:textSize="20dp"
                 android:typeface="monospace"
@@ -151,7 +151,7 @@
                 />
             <TextView
                 android:id="@+id/frSpeedTripStart"
-                android:layout_width="70dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:text="008.8"
                 android:textColor="@android:color/black"
@@ -163,7 +163,7 @@
                 />
             <TextView
                 android:id="@+id/frSpeedTripDay"
-                android:layout_width="70dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:text="008.8"
                 android:textColor="@android:color/black"

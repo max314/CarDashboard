@@ -86,7 +86,7 @@ public class SpeedFragment extends Fragment {
         }
         frSpeedLatitude.setText(Location.convert(location.getLatitude(), Location.FORMAT_DEGREES));
         frSpeedLongitude.setText(Location.convert(location.getLongitude(), Location.FORMAT_DEGREES));
-        frSpeedSpeed.setText(String.format("%.0f", location.getSpeed() * 1000 / 360));
+        frSpeedSpeed.setText(String.format("%.0f", location.getSpeed() * 3.6));
         frSpeedTripAll.setText(String.format(modelData.getTripAllSumator().getTripKM()));
         frSpeedTripOwn.setText(String.format(modelData.getTripOneSumator().getTripSmallKM()));
         frSpeedTripStart.setText(String.format(modelData.getTripStartSumator().getTripSmallKM()));
