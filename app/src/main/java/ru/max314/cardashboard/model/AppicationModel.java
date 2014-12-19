@@ -60,9 +60,11 @@ public class AppicationModel implements Runnable{
                 modelData.flushLocationLogger();
                 // Заодно сохраним модель
                 ApplicationModelFactory.saveModel();
-            }
-        });
+                }
+        })
+        .start();
         timerUI = new TimerUI(1000*30,this);
+        timerUI.start();
 
     }
 
