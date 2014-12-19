@@ -2,7 +2,6 @@ package ru.max314.cardashboard.model;
 
 import android.location.Location;
 import android.location.LocationProvider;
-import android.util.Log;
 
 import com.google.gson.annotations.Expose;
 
@@ -50,19 +49,19 @@ public class ModelData {
     /**
      * Весь пробег
      */
-    TripSumator allTripSumator = new TripSumator();
+    TripSumator tripAllSumator = new TripSumator();
     /**
      * за сегодня пробег
      */
-    TripSumator todayTripSumator = new TripSumator();
+    TripSumator tripTodaySumator = new TripSumator();
     /**
      * пробег со старта
      */
-    TripSumator startTripSumator = new TripSumator();
+    TripSumator tripStartSumator = new TripSumator();
     /**
      * пробег 1
      */
-    TripSumator ownTripSumator = new TripSumator();
+    TripSumator tripOneSumator = new TripSumator();
 
     Date currentDate = null;
 
@@ -99,6 +98,10 @@ public class ModelData {
         this.currentLocation = currentLocation;
         if (logLocation)
             locationLogger.addEntity(currentLocation);
+        this.tripAllSumator.addFromLocation(currentLocation);
+        this.tripOneSumator.addFromLocation(currentLocation);
+        this.tripStartSumator.addFromLocation(currentLocation);
+        this.tripTodaySumator.addFromLocation(currentLocation);
     }
 
     /***
@@ -145,29 +148,29 @@ public class ModelData {
      * Сюросить пробег со старта двигателя
      */
     public void tripStartReset(){
-        startTripSumator.reset();
+        tripStartSumator.reset();
     }
     /**
      * Сбросить пробег 1
      */
     public void tripOwnReset(){
-        startTripSumator.reset();
+        tripStartSumator.reset();
     }
 
-    public TripSumator getAllTripSumator() {
-        return allTripSumator;
+    public TripSumator getTripAllSumator() {
+        return tripAllSumator;
     }
 
-    public TripSumator getTodayTripSumator() {
-        return todayTripSumator;
+    public TripSumator getTripTodaySumator() {
+        return tripTodaySumator;
     }
 
-    public TripSumator getStartTripSumator() {
-        return startTripSumator;
+    public TripSumator getTripStartSumator() {
+        return tripStartSumator;
     }
 
-    public TripSumator getOwnTripSumator() {
-        return ownTripSumator;
+    public TripSumator getTripOneSumator() {
+        return tripOneSumator;
     }
 
     //endregion

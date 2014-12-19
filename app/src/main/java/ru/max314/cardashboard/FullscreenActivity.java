@@ -1,20 +1,18 @@
 package ru.max314.cardashboard;
 
-import ru.max314.cardashboard.model.AppicationModel;
 import ru.max314.cardashboard.model.ApplicationModelFactory;
 import ru.max314.cardashboard.model.ModelData;
 import ru.max314.cardashboard.util.SystemUiHider;
+import ru.max314.cardashboard.view.SpeedFragment;
 import ru.max314.util.LogHelper;
 import ru.max314.util.TimerUI;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.graphics.AvoidXfermode;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -22,11 +20,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 
 /**
@@ -68,6 +64,7 @@ public class FullscreenActivity extends Activity {
      * The instance of the {@link SystemUiHider} for this activity.
      */
     private SystemUiHider mSystemUiHider;
+    private SpeedFragment speedFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +75,10 @@ public class FullscreenActivity extends Activity {
 
         final View controlsView = findViewById(R.id.fullscreen_content_controls);
         final View contentView = findViewById(R.id.fullscreen_content);
-        final View speedView = findViewById(R.id.speed);
+        final View speedView = findViewById(R.id.speedFragment);
+
+        speedFragment = (SpeedFragment) getFragmentManager().findFragmentById(R.id.speedFragment);
+
 
         // Set up an instance of SystemUiHider to control the system UI for
         // this activity.
@@ -152,12 +152,17 @@ public class FullscreenActivity extends Activity {
         timerUI = new TimerUI(500,new Runnable() {
             @Override
             public void run() {
-                updateMapPosition();
+                updateData();
             }
         });
         googleMap = mapView.getMap();
         setUpMapIfNeeded();
 
+    }
+
+    private void updateData(){
+        speedFragment.updateData();
+        updateMapPosition();
     }
 
     private void updateMapPosition() {
@@ -320,6 +325,10 @@ public class FullscreenActivity extends Activity {
         float zoom = googleMap.getCameraPosition().zoom-1;
         googleMap.animateCamera( CameraUpdateFactory.zoomTo(zoom));
         modelData.setCurrentZoom(zoom);
+
+    }
+
+    public void TestClick(View view) {
 
     }
 }

@@ -28,6 +28,7 @@ public class TripSumator {
             return;
         }
         if (LocationUtils.isSpeedZerro(location) || (LocationUtils.isEq(location,lastKnowLocation))){
+        //if ((LocationUtils.isEq(location,lastKnowLocation))){
             return;
         }
         double delta = lastKnowLocation.distanceTo(location);
@@ -50,5 +51,9 @@ public class TripSumator {
 
     public String getTripKM(){
         return String.format("%.0f",(startOffset+summator)/1000);
+    }
+
+    public String getTripSmallKM(){
+        return String.format("%.1f",(startOffset+summator)/1000);
     }
 }

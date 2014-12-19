@@ -1,7 +1,6 @@
 package ru.max314.cardashboard.model;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -84,7 +83,7 @@ public class AppicationModel implements Runnable{
      */
     public void dayChanged(){
         Log.d("dayChanged()");
-        modelData.getTodayTripSumator().reset();
+        modelData.getTripTodaySumator().reset();
         // Установить новую дату
         modelData.setCurrentDate(new Date());
     }

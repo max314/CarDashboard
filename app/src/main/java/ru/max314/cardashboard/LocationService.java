@@ -1,5 +1,6 @@
 package ru.max314.cardashboard;
 
+import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -65,6 +66,22 @@ public class LocationService extends Thread {
         }
 
         public void up() {
+            boolean enabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            locationManager.addGpsStatusListener(new android.location.GpsStatus.Listener() {
+                public void onGpsStatusChanged(int event) {
+                    switch (event) {
+                        case GpsStatus.GPS_EVENT_STARTED:
+                            // do your tasks
+                            break;
+                        case GpsStatus.GPS_EVENT_FIRST_FIX:
+                            // do your tasks
+                            break;
+                        case GpsStatus.GPS_EVENT_STOPPED:
+                            // do your tasks
+                            break;
+                    }
+                }
+            });
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         }
 
@@ -82,9 +99,24 @@ public class LocationService extends Thread {
         @Override
         public void onLocationChanged(Location location) {
             Log.d(location.toString());
-            Bundle b= location.getExtras ();
+
             modelData.setCurrentLocation(location);
+            //region Description
+            //            if (lastLocation==null)
+//                lastLocation = location;
+//
+//            if (lastLocation.getLatitude()!=location.getLatitude() || lastLocation.getLongitude()!=location.getLongitude()){
+//
+//                Bundle b= location.getExtras ();
+//                Log.d("dddd");
+//            }
+//            lastLocation = location;
+//            locationManager.removeUpdates(this);
+//            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+            //endregion
         }
+
+        private Location lastLocation = null;
 
         /**
          * Called when the provider status changes. This method is called when
