@@ -54,14 +54,14 @@ public class AppicationModel implements Runnable{
             modelData.setCurrentDate(new Date());
         }
         // Раз в три минуты сбрасываем лог местоположения
-        new TimerUI(1000*60*3,new Runnable() {
+        new TimerUI("Раз в три минуты сбрасываем лог местоположения",1000*60*3,new Runnable() {
             @Override
             public void run() {
                     saveAll();
                 }
         })
         .start();
-        timerUI = new TimerUI(1000*30,this);
+        timerUI = new TimerUI("каждые пол минуты проверяем смену даты",1000*30,this);
         timerUI.start();
 
     }
@@ -75,6 +75,7 @@ public class AppicationModel implements Runnable{
 
     @Override
     public void run() {
+        Log.d("каждые пол минуты проверяем смену даты выполнение");
         // каждые пол минуты
         // проверяем смену даты
         SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");

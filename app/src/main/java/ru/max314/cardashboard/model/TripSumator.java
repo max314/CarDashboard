@@ -27,8 +27,8 @@ public class TripSumator {
             lastKnowLocation=location;
             return;
         }
-        if (LocationUtils.isSpeedZerro(location) || (LocationUtils.isEq(location,lastKnowLocation))){
-        //if ((LocationUtils.isEq(location,lastKnowLocation))){
+//        if (LocationUtils.isSpeedZerro(location) || (LocationUtils.isEq(location,lastKnowLocation))){
+        if ((LocationUtils.isEq(location,lastKnowLocation))){
             return;
         }
         double delta = lastKnowLocation.distanceTo(location);

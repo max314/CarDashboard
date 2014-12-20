@@ -2,17 +2,22 @@ package ru.max314.cardashboard;
 
 import ru.max314.cardashboard.model.ApplicationModelFactory;
 import ru.max314.cardashboard.model.ModelData;
+import ru.max314.cardashboard.model.TripSumator;
 import ru.max314.cardashboard.util.SystemUiHider;
 import ru.max314.cardashboard.view.SpeedFragment;
+import ru.max314.cardashboard.view.TripSetupDialog;
 import ru.max314.util.LogHelper;
 import ru.max314.util.TimerUI;
 
 import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -139,6 +144,16 @@ public class FullscreenActivity extends Activity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+        getActionBar().addOnMenuVisibilityListener(new ActionBar.OnMenuVisibilityListener() {
+            @Override
+            public void onMenuVisibilityChanged(boolean isVisible) {
+                if (isVisible){
+                    if (AUTO_HIDE) {
+                        delayedHide(AUTO_HIDE_DELAY_MILLIS);
+                    }
+                }
+            }
+        });
 
         mapView = (MapView) findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
@@ -149,7 +164,7 @@ public class FullscreenActivity extends Activity {
         } catch (Throwable e) {
             e.printStackTrace();
         }
-        timerUI = new TimerUI(500,new Runnable() {
+        timerUI = new TimerUI("Update FullScreen Activity",500,new Runnable() {
             @Override
             public void run() {
                 updateData();
@@ -328,7 +343,16 @@ public class FullscreenActivity extends Activity {
 
     }
 
-    public void TestClick(View view) {
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    public void tripSetupClick(MenuItem item) {
+        TripSetupDialog tripSetupDialog = new TripSetupDialog();
+        tripSetupDialog.show(getFragmentManager(),"trip");
 
     }
 }
