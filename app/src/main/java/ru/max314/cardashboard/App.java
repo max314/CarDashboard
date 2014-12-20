@@ -2,6 +2,8 @@ package ru.max314.cardashboard;
 
 import android.app.Application;
 
+import ru.max314.cardashboard.model.ApplicationModelFactory;
+import ru.max314.cardashboard.service.BootCarService;
 import ru.max314.util.LogHelper;
 
 /**
@@ -25,8 +27,8 @@ public class App extends Application {
         super.onCreate();
         self = this;
         Log.d("App onCreate start");
-        BootMaxService.start(this);
-        Log.d("After BootMaxService.start(this);");
+        BootCarService.start(this);
+        Log.d("After BootCarService.start(this);");
         Runtime.getRuntime().addShutdownHook(new Thread());
     }
 
@@ -35,4 +37,9 @@ public class App extends Application {
         return self;
     }
 
+    @Override
+    public void onTerminate() {
+        ApplicationModelFactory.getModel().saveAll();
+        super.onTerminate();
+    }
 }
