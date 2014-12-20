@@ -57,14 +57,19 @@ public class AppicationModel implements Runnable{
         new TimerUI(1000*60*3,new Runnable() {
             @Override
             public void run() {
-                modelData.flushLocationLogger();
-                // Заодно сохраним модель
-                ApplicationModelFactory.saveModel();
+                    saveAll();
                 }
         })
         .start();
         timerUI = new TimerUI(1000*30,this);
         timerUI.start();
+
+    }
+
+    public void saveAll(){
+        modelData.flushLocationLogger();
+        // Заодно сохраним модель
+        ApplicationModelFactory.saveModel();
 
     }
 

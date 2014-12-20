@@ -31,18 +31,28 @@
         </activity>
 
         <service
-            android:name=".BootMaxService"
+            android:name=".service.BootCarService"
             android:exported="false" >
         </service>
 
         <receiver
-            android:name=".OnBootBroadcastReceiver"
+            android:name=".service.OnBootBroadcastReceiver"
             android:enabled="true"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+        <receiver
+            android:name=".service.OnReBootBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
+            </intent-filter>
+
+        </receiver>
+
 
         <activity
             android:name=".FullscreenActivity"
@@ -62,6 +72,7 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" >
         </activity>
+
     </application>
 
 </manifest>

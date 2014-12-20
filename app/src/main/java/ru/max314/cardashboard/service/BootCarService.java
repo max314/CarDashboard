@@ -1,4 +1,4 @@
-package ru.max314.cardashboard;
+package ru.max314.cardashboard.service;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -14,9 +14,9 @@ import ru.max314.util.LogHelper;
  * TODO: Customize class - update intent actions, extra parameters and static
  * helper methods.
  */
-public class BootMaxService extends IntentService {
+public class BootCarService extends IntentService {
     public static final String ACTION_START = "ru.max314.cardashboard.START";
-    LogHelper Log = new LogHelper(BootMaxService.class);
+    LogHelper Log = new LogHelper(BootCarService.class);
 
     /**
      * Starts this service to perform action Foo with the given parameters. If
@@ -26,14 +26,14 @@ public class BootMaxService extends IntentService {
      */
     // TODO: Customize helper method
     public static void start(Context context) {
-        Intent intent = new Intent(context, BootMaxService.class);
+        Intent intent = new Intent(context, BootCarService.class);
         intent.setAction(ACTION_START);
         context.startService(intent);
     }
 
 
-    public BootMaxService() {
-        super("BootMaxService");
+    public BootCarService() {
+        super("BootCarService");
     }
 
     @Override
