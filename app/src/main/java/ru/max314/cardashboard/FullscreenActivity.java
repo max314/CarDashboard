@@ -42,6 +42,7 @@ public class FullscreenActivity extends Activity {
     private MapView mapView;
     private ModelData modelData;
     private TimerUI timerUI;
+    private  boolean mapBussy = true;
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -181,6 +182,8 @@ public class FullscreenActivity extends Activity {
     }
 
     private void updateMapPosition() {
+        if (mapBussy)
+            return;
         Location location = modelData.getCurrentLocation();
         if (location ==null)
             return;
@@ -189,9 +192,20 @@ public class FullscreenActivity extends Activity {
                 .target(loc)
                 .zoom(modelData.getCurrentZoom())
                 .bearing(location.getBearing())
-                //.tilt(30)
+                .tilt(30)
                 .build();
-        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        mapBussy = true;
+        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition),new GoogleMap.CancelableCallback() {
+            @Override
+            public void onFinish() {
+                mapBussy = false;
+            }
+
+            @Override
+            public void onCancel() {
+                mapBussy = false;
+            }
+        });
     }
 
     private void setUpMapIfNeeded() {
@@ -221,6 +235,7 @@ public class FullscreenActivity extends Activity {
             public void onMapLoaded() {
                 Log.d("map loaded...");
                 timerUI.start();
+                mapBussy = false;
             }
         });
         GoogleMap.OnMyLocationChangeListener myLocationChangeListener = new GoogleMap.OnMyLocationChangeListener() {
@@ -256,6 +271,7 @@ public class FullscreenActivity extends Activity {
 //        });
 
         //   googleMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+
     }
 
 
@@ -352,7 +368,7 @@ public class FullscreenActivity extends Activity {
 
     public void tripSetupClick(MenuItem item) {
         TripSetupDialog tripSetupDialog = new TripSetupDialog();
-        tripSetupDialog.show(getFragmentManager(),"trip");
+        tripSetupDialog.show(getFragmentManager(), "trip");
 
     }
 }
