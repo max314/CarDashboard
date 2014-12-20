@@ -15,15 +15,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right">
             <TextView
+                style="@style/SpeedCoordinateLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="местоположение: "/>
 
             <TextView
+                style="@style/SpeedCoordinateData"
                 android:id="@+id/frSpeedLatitude"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
                 android:text="57:52:35,4" />
 
             <TextView
@@ -35,10 +36,11 @@
                 android:text="/" />
 
             <TextView
+                style="@style/SpeedCoordinateData"
                 android:id="@+id/frSpeedLongitude"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+
                 android:text="57:52:35,4" />
         </LinearLayout>
 
@@ -52,6 +54,7 @@
             >
 
             <TextView
+                style="@style/SpeedSpeenData"
                 android:id="@+id/frSpeedSpeed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -75,24 +78,24 @@
                 android:textIsSelectable="false">
 
                 <TextView
+                    style="@style/SpeedSpeedLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="км"
-                    android:textColor="@android:color/black"
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="2dp"
-                    android:background="@android:color/black" />
+                    android:background="#1e88e5" />
 
                 <TextView
+                    style="@style/SpeedSpeedLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="ч"
-                    android:textColor="@android:color/black"
                     android:textSize="16dp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -106,21 +109,21 @@
             android:layout_marginTop="-10dp"
             >
             <TextView
+                style="@style/SpeedSpeedLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="пробег:"
-                android:textColor="@android:color/black"
                 android:textSize="12dp"
                 android:layout_column="0"
                 android:layout_row="0"
                 android:layout_gravity="right|center"
                 />
             <TextView
+                style="@style/SpeedSpeenData"
                 android:id="@+id/frSpeedTripAll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="144,3256"
-                android:textColor="@android:color/black"
                 android:textSize="20dp"
                 android:layout_column="1"
                 android:layout_columnSpan="3"
@@ -128,21 +131,21 @@
                 android:layout_gravity="center"
                 />
             <TextView
+                style="@style/SpeedSpeedLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Trip1/старт/день:"
-                android:textColor="@android:color/black"
                 android:textSize="12dp"
                 android:layout_column="0"
                 android:layout_row="1"
 
                 />
             <TextView
+                style="@style/SpeedSpeenData"
                 android:id="@+id/frSpeedTripOwn"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:text="1899.8"
-                android:textColor="@android:color/black"
                 android:textSize="20dp"
                 android:typeface="monospace"
                 android:layout_column="1"
@@ -150,11 +153,11 @@
                 android:gravity="right"
                 />
             <TextView
+                style="@style/SpeedSpeenData"
                 android:id="@+id/frSpeedTripStart"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:text="008.8"
-                android:textColor="@android:color/black"
                 android:textSize="20dp"
                 android:typeface="monospace"
                 android:layout_column="2"
@@ -162,11 +165,11 @@
                 android:gravity="right"
                 />
             <TextView
+                style="@style/SpeedSpeenData"
                 android:id="@+id/frSpeedTripDay"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:text="008.8"
-                android:textColor="@android:color/black"
                 android:textSize="20dp"
                 android:typeface="monospace"
                 android:layout_column="3"

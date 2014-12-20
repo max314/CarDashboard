@@ -23,4 +23,23 @@
 
     <style name="ButtonBarButton" />
 
+    <style name="SpeedCoordinateLabel">
+        <item name="android:textColor">#1e88e5</item>
+        <item name="android:textSize">18sp</item>
+
+    </style>
+    <style name="SpeedCoordinateData" >
+        <item name="android:textColor">#2962ff</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="SpeedSpeedLabel">
+        <item name="android:textColor">#1e88e5</item>
+
+
+    </style>
+    <style name="SpeedSpeenData" >
+        <item name="android:textColor">#2962ff</item>
+
+    </style>
+
 </resources>
