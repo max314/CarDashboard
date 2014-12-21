@@ -5,6 +5,7 @@ import ru.max314.cardashboard.model.ModelData;
 import ru.max314.cardashboard.util.SystemUiHider;
 import ru.max314.cardashboard.view.SpeedFragment;
 import ru.max314.cardashboard.view.TripSetupDialog;
+import ru.max314.util.DisplayToast;
 import ru.max314.util.LogHelper;
 import ru.max314.util.threads.TimerUIHelper;
 

@@ -10,13 +10,18 @@ public class DisplayToast  implements Runnable {
 
     private final Context mContext;
     String mText;
+    int duration;
 
-    public DisplayToast(Context mContext, String text){
+    public DisplayToast(Context mContext, String text, boolean isShort){
         this.mContext = mContext;
         mText = text;
+        if (isShort)
+            duration = Toast.LENGTH_SHORT;
+        else
+            duration = Toast.LENGTH_LONG;
     }
 
     public void run(){
-        Toast.makeText(mContext, mText, Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, mText, this.duration).show();
     }
 }

@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import ru.max314.cardashboard.model.ApplicationModelFactory;
+import ru.max314.util.DisplayToast;
 import ru.max314.util.threads.TimerHelper;
 
 
@@ -46,6 +47,7 @@ public class MainActivity extends ActionBarActivity {
 
     public void startFullScreen(View view) {
         Intent intent = new Intent(this, FullscreenActivity.class);
+        new DisplayToast(App.getInstance(),"Загружаеться карта....",false).run();
         startActivity(intent);
     }
 
