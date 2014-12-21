@@ -55,7 +55,7 @@ public class ClockFragment extends Fragment {
 
         Date date = new Date();
         SimpleDateFormat sf;
-        sf = new SimpleDateFormat("EEEE, dd,LLLL yyyy");
+        sf = new SimpleDateFormat("EEEE\ndd LLLL yyyy");
         String buff;
         buff = sf.format(date);
         frClockDate.setText(buff);

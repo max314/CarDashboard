@@ -16,12 +16,15 @@
         android:text="10:10"
         />
     <TextView
-        style="@style/SpeedSpeedLabel"
+        style="@style/SpeedSpeenData"
         android:id="@+id/frClockDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:gravity="right"
         android:textStyle="italic"
-        android:text="понедельник 12.12.2014"
+        android:textSize="24dp"
+        android:lines="2"
+        android:text="понедельник\n 21 декабрь 2014"
         android:layout_marginTop="-16dp"/>
 </LinearLayout>
