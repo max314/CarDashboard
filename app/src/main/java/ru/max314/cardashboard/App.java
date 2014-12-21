@@ -10,7 +10,7 @@ import ru.max314.util.LogHelper;
  * Created by max on 15.12.2014.
  */
 public class App extends Application {
-    LogHelper Log = new LogHelper(App.class);
+    protected static LogHelper Log = new LogHelper(App.class);
     static App self;
 
     /**

@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import ru.max314.cardashboard.model.ApplicationModelFactory;
+import ru.max314.util.threads.TimerHelper;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -42,27 +44,18 @@ public class MainActivity extends ActionBarActivity {
 //        return super.onOptionsItemSelected(item);
 //    }
 
-    LocationService locationService = null;
-    public void start(View view) {
-        ApplicationModelFactory.getModel().startLocationService();
-    }
-
-    public void stop(View view) {
-        ApplicationModelFactory.getModel().stoptLocationService();
-    }
-
-    public void Click3(View view) {
+    public void startFullScreen(View view) {
         Intent intent = new Intent(this, FullscreenActivity.class);
         startActivity(intent);
     }
 
-    public void Click4(View view) {
-        Intent intent = new Intent(this, MapsActivity.class);
-        startActivity(intent);
-
-    }
-
-    public void Click5(View view) {
-        ApplicationModelFactory.getModel().getModelData().flushLocationLogger();
+    public void StartTimer(View view) {
+        TimerHelper timerHelper = new TimerHelper("foo",0,1*10,new Runnable() {
+            @Override
+            public void run() {
+                Log.d("timer","timer");
+            }
+        });
+        timerHelper.start();
     }
 }

@@ -43,15 +43,15 @@
         tools:layout="@layout/fragment_speed"
         />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="dfgsdfgdsf"
-            android:onClick="TestClick"/>
-        </LinearLayout>
+    <fragment
+        android:id="@+id/clockFragment"
+        android:name="ru.max314.cardashboard.view.ClockFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-14dp"
+        android:layout_marginLeft="50dp"
+        android:layout_gravity="left|top"
+        tools:layout="@layout/fragment_clock" />
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->

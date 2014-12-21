@@ -8,7 +8,7 @@ import ru.max314.cardashboard.model.ApplicationModelFactory;
 import ru.max314.util.LogHelper;
 
 public class OnReBootBroadcastReceiver extends BroadcastReceiver {
-    LogHelper Log = new LogHelper(OnReBootBroadcastReceiver.class);
+    protected static LogHelper Log = new LogHelper(OnReBootBroadcastReceiver.class);
     public OnReBootBroadcastReceiver() {
     }
 

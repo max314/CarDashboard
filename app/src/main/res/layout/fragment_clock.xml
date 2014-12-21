@@ -1,0 +1,27 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="ru.max314.cardashboard.view.ClockFragment">
+    <TextView
+        style="@style/SpeedSpeenData"
+        android:id="@+id/frClockTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="80dp"
+        android:textStyle="bold"
+        android:text="10:10"
+        />
+    <TextView
+        style="@style/SpeedSpeedLabel"
+        android:id="@+id/frClockDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textStyle="italic"
+        android:text="понедельник 12.12.2014"
+        android:layout_marginTop="-16dp"/>
+</LinearLayout>

@@ -16,7 +16,7 @@ import ru.max314.util.LogHelper;
  */
 public class BootCarService extends IntentService {
     public static final String ACTION_START = "ru.max314.cardashboard.START";
-    LogHelper Log = new LogHelper(BootCarService.class);
+    protected static LogHelper Log = new LogHelper(BootCarService.class);
 
     /**
      * Starts this service to perform action Foo with the given parameters. If

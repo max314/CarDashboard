@@ -7,7 +7,7 @@ import android.content.Intent;
 import ru.max314.util.LogHelper;
 
 public class OnBootBroadcastReceiver extends BroadcastReceiver {
-    LogHelper Log = new LogHelper(OnBootBroadcastReceiver.class);
+    protected static LogHelper Log = new LogHelper(OnBootBroadcastReceiver.class);
     public OnBootBroadcastReceiver() {
     }
 

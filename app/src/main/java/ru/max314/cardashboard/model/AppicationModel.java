@@ -1,40 +1,47 @@
 package ru.max314.cardashboard.model;
 
 import android.content.Context;
+import android.util.Log;
+import android.util.TimeUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import ru.max314.cardashboard.App;
 import ru.max314.cardashboard.LocationService;
 import ru.max314.util.LogHelper;
-import ru.max314.util.TimerUI;
+import ru.max314.util.threads.LoopingThread;
+import ru.max314.util.threads.TimerHelper;
 
 /**
  * Класс модеь приложения тут будем держать все данные
  * Created by max on 15.12.2014.
  */
-public class AppicationModel implements Runnable{
-    LogHelper Log = new LogHelper(AppicationModel.class);
+public class AppicationModel {
+    protected static LogHelper Log = new LogHelper(AppicationModel.class);
     LocationService locationService = null;
-    TimerUI timerUI = null;
+    LoopingThread loopingThread = new LoopingThread();
+    TimerHelper logSaveWatcher = null;
+    TimerHelper dateChangerWatcher = null;
 
     ModelData modelData = new ModelData();
 
-    public void startLocationService(){
-        if (locationService==null){
-            locationService = new LocationService((android.location.LocationManager) App.getInstance().getSystemService(Context.LOCATION_SERVICE),modelData);
+    public void startLocationService() {
+        if (locationService == null) {
+            locationService = new LocationService((android.location.LocationManager) App.getInstance().getSystemService(Context.LOCATION_SERVICE), modelData);
             locationService.start();
         }
     }
-    public void stoptLocationService(){
-        if (locationService!=null){
+
+    public void stoptLocationService() {
+        if (locationService != null) {
             locationService.tryStop();
             locationService = null;
         }
     }
 
-    public boolean isLocationServiceStarted(){
+    public boolean isLocationServiceStarted() {
         return locationService == null;
     }
 
@@ -46,42 +53,59 @@ public class AppicationModel implements Runnable{
         this.modelData = modelData;
     }
 
-    public void initAftreCreate(){
+    public void initAftreCreate() {
         modelData.tripStartReset();
         Log.d("Reset trip from engine start.");
         // Если нет текущей даты установим ее
-        if (modelData.getCurrentDate()==null){
+        if (modelData.getCurrentDate() == null) {
             modelData.setCurrentDate(new Date());
         }
-        // Раз в три минуты сбрасываем лог местоположения
-        new TimerUI("Раз в три минуты сбрасываем лог местоположения",1000*60*3,new Runnable() {
-            @Override
-            public void run() {
-                    saveAll();
-                }
-        })
-        .start();
-        timerUI = new TimerUI("каждые пол минуты проверяем смену даты",1000*30,this);
-        timerUI.start();
 
+        //region переодические задачи в отдельном потоке
+
+        configBackgoundTask();
     }
 
-    public void saveAll(){
+    private void configBackgoundTask() {
+        dateChangerWatcher = new TimerHelper("каждые пол минуты проверяем смену даты",
+                TimeUnit.MILLISECONDS.convert(1,TimeUnit.MINUTES), // Начинаем через миуту
+                TimeUnit.MILLISECONDS.convert(30,TimeUnit.SECONDS), // каждые полминуты
+                new Runnable() {
+            @Override
+            public void run() {
+                dateChanger();
+            }
+        });
+        dateChangerWatcher.start();
+
+
+        logSaveWatcher = new TimerHelper("Раз в три минуты сбрасываем лог местоположения",
+                TimeUnit.MILLISECONDS.convert(3,TimeUnit.MINUTES), // Начинаем через миуту
+                TimeUnit.MILLISECONDS.convert(3,TimeUnit.MINUTES), // каждые полминуты
+                new Runnable() {
+            @Override
+            public void run() {
+                saveAll();
+            }
+        });
+        logSaveWatcher.start();
+    }
+
+    public void saveAll() {
         modelData.flushLocationLogger();
         // Заодно сохраним модель
         ApplicationModelFactory.saveModel();
 
     }
 
-    @Override
-    public void run() {
+    public void dateChanger() {
         Log.d("каждые пол минуты проверяем смену даты выполнение");
         // каждые пол минуты
         // проверяем смену даты
         SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
         String dateNow = sdf.format(new Date());
         String dateModel = sdf.format(modelData.getCurrentDate());
-        if (!dateModel.equals(dateNow)){
+        if (!dateModel.equals(dateNow)) {
             dayChanged();
         }
     }
@@ -89,7 +113,7 @@ public class AppicationModel implements Runnable{
     /**
      * Дата изменилась
      */
-    public void dayChanged(){
+    public void dayChanged() {
         Log.d("dayChanged()");
         modelData.getTripTodaySumator().reset();
         // Установить новую дату

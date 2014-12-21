@@ -2,12 +2,11 @@ package ru.max314.cardashboard;
 
 import ru.max314.cardashboard.model.ApplicationModelFactory;
 import ru.max314.cardashboard.model.ModelData;
-import ru.max314.cardashboard.model.TripSumator;
 import ru.max314.cardashboard.util.SystemUiHider;
 import ru.max314.cardashboard.view.SpeedFragment;
 import ru.max314.cardashboard.view.TripSetupDialog;
 import ru.max314.util.LogHelper;
-import ru.max314.util.TimerUI;
+import ru.max314.util.threads.TimerUIHelper;
 
 import android.annotation.TargetApi;
 import android.app.ActionBar;
@@ -37,11 +36,10 @@ import com.google.android.gms.maps.model.LatLng;
  * @see SystemUiHider
  */
 public class FullscreenActivity extends Activity {
-    LogHelper Log = new LogHelper(FullscreenActivity.class);
+    protected static LogHelper Log = new LogHelper(FullscreenActivity.class);
     private GoogleMap googleMap; // Might be null if Google Play services APK is not available.
     private MapView mapView;
     private ModelData modelData;
-    private TimerUI timerUI;
     private  boolean mapBussy = true;
     /**
      * Whether or not the system UI should be auto-hidden after
@@ -71,6 +69,8 @@ public class FullscreenActivity extends Activity {
      */
     private SystemUiHider mSystemUiHider;
     private SpeedFragment speedFragment;
+    TimerUIHelper timerUIHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +82,7 @@ public class FullscreenActivity extends Activity {
         final View controlsView = findViewById(R.id.fullscreen_content_controls);
         final View contentView = findViewById(R.id.fullscreen_content);
         final View speedView = findViewById(R.id.speedFragment);
+        final View clockView = findViewById(R.id.clockFragment);
 
         speedFragment = (SpeedFragment) getFragmentManager().findFragmentById(R.id.speedFragment);
 
@@ -122,6 +123,7 @@ public class FullscreenActivity extends Activity {
 
                         }
                         speedView.setVisibility(visible ? View.GONE: View.VISIBLE );
+                        clockView.setVisibility(visible ? View.GONE: View.VISIBLE );
                         if (visible && AUTO_HIDE) {
                             // Schedule a hide().
                             delayedHide(AUTO_HIDE_DELAY_MILLIS);
@@ -165,12 +167,6 @@ public class FullscreenActivity extends Activity {
         } catch (Throwable e) {
             e.printStackTrace();
         }
-        timerUI = new TimerUI("Update FullScreen Activity",500,new Runnable() {
-            @Override
-            public void run() {
-                updateData();
-            }
-        });
         googleMap = mapView.getMap();
         setUpMapIfNeeded();
 
@@ -234,7 +230,6 @@ public class FullscreenActivity extends Activity {
             @Override
             public void onMapLoaded() {
                 Log.d("map loaded...");
-                timerUI.start();
                 mapBussy = false;
             }
         });
@@ -277,12 +272,21 @@ public class FullscreenActivity extends Activity {
 
     @Override
     public void onResume() {
+
+        timerUIHelper = new TimerUIHelper(500,new Runnable() {
+            @Override
+            public void run() {
+                updateData();
+            }
+        });
+
         super.onResume();
         mapView.onResume();
     }
 
     @Override
     public void onPause() {
+        timerUIHelper.cancel();
         modelData.setCurrentZoom(googleMap.getCameraPosition().zoom);
         super.onPause();
         mapView.onPause();
@@ -290,7 +294,6 @@ public class FullscreenActivity extends Activity {
 
     @Override
     public void onDestroy() {
-        timerUI.stop();
         ApplicationModelFactory.saveModel();
         super.onDestroy();
         mapView.onDestroy();
