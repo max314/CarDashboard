@@ -14,6 +14,7 @@ import butterknife.InjectView;
 import ru.max314.cardashboard.R;
 import ru.max314.cardashboard.model.ApplicationModelFactory;
 import ru.max314.cardashboard.model.ModelData;
+import ru.max314.util.threads.TimerUIHelper;
 
 /**
  * fragment fro display speed and trip
@@ -41,6 +42,7 @@ public class SpeedFragment extends Fragment {
     TextView frSpeedTripDay;
 
     ModelData modelData;
+    TimerUIHelper timerUIHelper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,7 @@ public class SpeedFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_speed, container, false);
         ButterKnife.inject(this, view);
+        modelData = ApplicationModelFactory.getModel().getModelData();
         return view;
 
     }
@@ -61,13 +64,49 @@ public class SpeedFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        modelData = ApplicationModelFactory.getModel().getModelData();
+
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         modelData = null;
+    }
+
+    /**
+     * Called when the fragment is visible to the user and actively running.
+     * This is generally
+     * tied to {@link android.app.Activity#onResume() Activity.onResume} of the containing
+     * Activity's lifecycle.
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (timerUIHelper != null) {
+            timerUIHelper.cancel();
+        }
+        timerUIHelper = new TimerUIHelper(500, new Runnable() {
+            @Override
+            public void run() {
+                updateData();
+            }
+        });
+
+    }
+
+    /**
+     * Called when the Fragment is no longer resumed.  This is generally
+     * tied to {@link android.app.Activity#onPause() Activity.onPause} of the containing
+     * Activity's lifecycle.
+     */
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (timerUIHelper != null) {
+            timerUIHelper.cancel();
+            timerUIHelper = null;
+        }
+
     }
 
     /**

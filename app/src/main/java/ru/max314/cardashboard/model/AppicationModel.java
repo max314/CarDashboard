@@ -102,7 +102,7 @@ public class AppicationModel {
         Log.d("каждые пол минуты проверяем смену даты выполнение");
         // каждые пол минуты
         // проверяем смену даты
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String dateNow = sdf.format(new Date());
         String dateModel = sdf.format(modelData.getCurrentDate());
         if (!dateModel.equals(dateNow)) {

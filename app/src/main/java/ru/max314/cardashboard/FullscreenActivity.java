@@ -3,6 +3,7 @@ package ru.max314.cardashboard;
 import ru.max314.cardashboard.model.ApplicationModelFactory;
 import ru.max314.cardashboard.model.ModelData;
 import ru.max314.cardashboard.util.SystemUiHider;
+import ru.max314.cardashboard.view.GMapFragment;
 import ru.max314.cardashboard.view.SpeedFragment;
 import ru.max314.cardashboard.view.TripSetupDialog;
 import ru.max314.util.DisplayToast;
@@ -37,11 +38,9 @@ import com.google.android.gms.maps.model.LatLng;
  * @see SystemUiHider
  */
 public class FullscreenActivity extends Activity {
+
     protected static LogHelper Log = new LogHelper(FullscreenActivity.class);
-    private GoogleMap googleMap; // Might be null if Google Play services APK is not available.
-    private MapView mapView;
     private ModelData modelData;
-    private  boolean mapBussy = true;
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -70,6 +69,7 @@ public class FullscreenActivity extends Activity {
      */
     private SystemUiHider mSystemUiHider;
     private SpeedFragment speedFragment;
+    private GMapFragment gMapFragment;
     TimerUIHelper timerUIHelper;
 
 
@@ -84,8 +84,10 @@ public class FullscreenActivity extends Activity {
         final View contentView = findViewById(R.id.fullscreen_content);
         final View speedView = findViewById(R.id.speedFragment);
         final View clockView = findViewById(R.id.clockFragment);
+        final View backgroundView = findViewById(R.id.frGMapView);
 
         speedFragment = (SpeedFragment) getFragmentManager().findFragmentById(R.id.speedFragment);
+        gMapFragment = (GMapFragment) getFragmentManager().findFragmentById(R.id.frMapView);
 
 
         // Set up an instance of SystemUiHider to control the system UI for
@@ -158,154 +160,16 @@ public class FullscreenActivity extends Activity {
                 }
             }
         });
-
-        mapView = (MapView) findViewById(R.id.mapView);
-        mapView.onCreate(savedInstanceState);
-//        mapView.onResume();//needed to get the map to display immediately
-
-        try {
-            MapsInitializer.initialize(this);
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-        googleMap = mapView.getMap();
-        setUpMapIfNeeded();
-
-    }
-
-    private void updateData(){
-        speedFragment.updateData();
-        updateMapPosition();
-    }
-
-    private void updateMapPosition() {
-        if (mapBussy)
-            return;
-        Location location = modelData.getCurrentLocation();
-        if (location ==null)
-            return;
-        LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(loc)
-                .zoom(modelData.getCurrentZoom())
-                .bearing(location.getBearing())
-                .tilt(30)
-                .build();
-        mapBussy = true;
-        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition),new GoogleMap.CancelableCallback() {
-            @Override
-            public void onFinish() {
-                mapBussy = false;
-            }
-
-            @Override
-            public void onCancel() {
-                mapBussy = false;
-            }
-        });
-    }
-
-    private void setUpMapIfNeeded() {
-        // Do a null check to confirm that we have not already instantiated the map.
-        // Check if we were successful in obtaining the map.
-        if (googleMap != null) {
-            setUpMap();
-        }
-    }
-
-    /**
-     * This is where we can add markers or lines, add listeners or move the camera. In this case, we
-     * just add a marker near Africa.
-     * <p>
-     * This should only be called once and when we are sure that {@link #googleMap} is not null.
-     */
-    private void setUpMap() {
-
-        googleMap.setTrafficEnabled(true);
-        UiSettings uiSettings = googleMap.getUiSettings();
-        uiSettings.setCompassEnabled(true);
-        uiSettings.setMyLocationButtonEnabled(false);
-        googleMap.setMyLocationEnabled(true);
-
-        googleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
-            @Override
-            public void onMapLoaded() {
-                Log.d("map loaded...");
-                mapBussy = false;
-            }
-        });
-        GoogleMap.OnMyLocationChangeListener myLocationChangeListener = new GoogleMap.OnMyLocationChangeListener() {
-            @Override
-            public void onMyLocationChange(Location location) {
-                Log.d("map lonMyLocationChange...");
-                LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
-                //Marker mMarker = googleMap.addMarker(new MarkerOptions().position(loc));
-//                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 15.0f));
-                if (modelData.getCurrentZoom()>0){
-                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc,modelData.getCurrentZoom()));
-                } else{
-                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc,modelData.getCurrentZoom()));
-                    }
-                float min = googleMap.getMinZoomLevel();
-                float max = googleMap.getMaxZoomLevel();
-            }
-        };
-//        googleMap.setOnMyLocationChangeListener(myLocationChangeListener);
-
-//        if (modelData.getCurrentZoom()>0){
-//            googleMap.animateCamera( CameraUpdateFactory.zoomTo(modelData.getCurrentZoom()));
-//
-//        }
-
-//        // Отслеживаем зумм карты
-//        googleMap.setOnCameraChangeListener( new GoogleMap.OnCameraChangeListener() {
-//            @Override
-//            public void onCameraChange(CameraPosition cameraPosition) {
-//                Log.d("map onCameraChange...");
-//                modelData.setCurrentZoom(cameraPosition.zoom);
-//            }
-//        });
-
-        //   googleMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
-
     }
 
 
-    @Override
-    public void onResume() {
 
-        timerUIHelper = new TimerUIHelper(500,new Runnable() {
-            @Override
-            public void run() {
-                updateData();
-            }
-        });
-
-        super.onResume();
-        mapView.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        timerUIHelper.cancel();
-        modelData.setCurrentZoom(googleMap.getCameraPosition().zoom);
-        super.onPause();
-        mapView.onPause();
-    }
 
     @Override
     public void onDestroy() {
         ApplicationModelFactory.saveModel();
         super.onDestroy();
-        mapView.onDestroy();
     }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
-
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -351,16 +215,11 @@ public class FullscreenActivity extends Activity {
     }
 
     public void Plus(View view) {
-        float zoom = googleMap.getCameraPosition().zoom+1;
-        googleMap.animateCamera( CameraUpdateFactory.zoomTo(zoom));
-        modelData.setCurrentZoom(zoom);
+        gMapFragment.ZoomIn();
     }
 
     public void Minus(View view) {
-        float zoom = googleMap.getCameraPosition().zoom-1;
-        googleMap.animateCamera( CameraUpdateFactory.zoomTo(zoom));
-        modelData.setCurrentZoom(zoom);
-
+        gMapFragment.ZoomOut();
     }
 
 
