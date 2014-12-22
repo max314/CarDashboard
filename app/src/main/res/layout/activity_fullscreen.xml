@@ -19,12 +19,18 @@
         android:textSize="50sp"
         android:gravity="center"
          >
+        <!--<fragment-->
+            <!--android:name="ru.max314.cardashboard.view.GMapFragment"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:id="@+id/frMapView"-->
+            <!--tools:layout="@layout/fragment_gmap" />-->
         <fragment
-            android:name="ru.max314.cardashboard.view.GMapFragment"
+            android:name="ru.max314.cardashboard.view.OSMapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/frMapView"
-            tools:layout="@layout/fragment_gmap" />
+            tools:layout="@layout/fragment_osmap" />
 
         <!--<TextView android:id="@+id/fullscreen_content1" android:layout_width="match_parent"-->
             <!--android:layout_height="match_parent" android:keepScreenOn="true" android:textColor="#33b5e5"-->

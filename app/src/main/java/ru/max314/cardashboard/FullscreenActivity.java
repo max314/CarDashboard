@@ -4,16 +4,15 @@ import ru.max314.cardashboard.model.ApplicationModelFactory;
 import ru.max314.cardashboard.model.ModelData;
 import ru.max314.cardashboard.util.SystemUiHider;
 import ru.max314.cardashboard.view.GMapFragment;
+import ru.max314.cardashboard.view.IBackgroudMapFrame;
 import ru.max314.cardashboard.view.SpeedFragment;
 import ru.max314.cardashboard.view.TripSetupDialog;
-import ru.max314.util.DisplayToast;
 import ru.max314.util.LogHelper;
 import ru.max314.util.threads.TimerUIHelper;
 
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,14 +20,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.UiSettings;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
 
 
 /**
@@ -69,7 +60,7 @@ public class FullscreenActivity extends Activity {
      */
     private SystemUiHider mSystemUiHider;
     private SpeedFragment speedFragment;
-    private GMapFragment gMapFragment;
+    private IBackgroudMapFrame backgroudMapFrame;
     TimerUIHelper timerUIHelper;
 
 
@@ -84,10 +75,11 @@ public class FullscreenActivity extends Activity {
         final View contentView = findViewById(R.id.fullscreen_content);
         final View speedView = findViewById(R.id.speedFragment);
         final View clockView = findViewById(R.id.clockFragment);
-        final View backgroundView = findViewById(R.id.frGMapView);
+//        final View backgroundView = findViewById(R.id.frGMapView);
 
         speedFragment = (SpeedFragment) getFragmentManager().findFragmentById(R.id.speedFragment);
-        gMapFragment = (GMapFragment) getFragmentManager().findFragmentById(R.id.frMapView);
+        //backgroudMapFrame = (GMapFragment) getFragmentManager().findFragmentById(R.id.frMapView);
+        backgroudMapFrame = (IBackgroudMapFrame) getFragmentManager().findFragmentById(R.id.frMapView);
 
 
         // Set up an instance of SystemUiHider to control the system UI for
@@ -153,7 +145,7 @@ public class FullscreenActivity extends Activity {
         getActionBar().addOnMenuVisibilityListener(new ActionBar.OnMenuVisibilityListener() {
             @Override
             public void onMenuVisibilityChanged(boolean isVisible) {
-                if (isVisible){
+                if (isVisible) {
                     if (AUTO_HIDE) {
                         delayedHide(AUTO_HIDE_DELAY_MILLIS);
                     }
@@ -215,11 +207,11 @@ public class FullscreenActivity extends Activity {
     }
 
     public void Plus(View view) {
-        gMapFragment.ZoomIn();
+        backgroudMapFrame.ZoomIn();
     }
 
     public void Minus(View view) {
-        gMapFragment.ZoomOut();
+        backgroudMapFrame.ZoomOut();
     }
 
 
