@@ -26,6 +26,12 @@ public class ModelData {
     private float currentZoom = -1;
 
     /**
+     * Текущи зум на карте open street
+     */
+    private int currentOpenStreetZoom = -1;
+
+
+    /**
      * Текущая позиция на карте
      */
     private Location currentLocation = null;
@@ -80,6 +86,23 @@ public class ModelData {
      */
     public void setCurrentZoom(float currentZoom) {
         this.currentZoom = currentZoom;
+    }
+
+
+    /***
+     * Текущей зум openStreet
+     * @return
+     */
+    public int getCurrentOpenStreetZoom() {
+        return currentOpenStreetZoom;
+    }
+
+    /***
+     * Текущей зум openStreet
+     * @return
+     */
+    public void setCurrentOpenStreetZoom(int currentOpenStreetZoom) {
+        this.currentOpenStreetZoom = currentOpenStreetZoom;
     }
 
     /***

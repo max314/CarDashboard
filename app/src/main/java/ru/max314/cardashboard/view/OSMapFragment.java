@@ -13,6 +13,7 @@ import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.DirectedLocationOverlay;
 
 import ru.max314.cardashboard.R;
 import ru.max314.cardashboard.model.ApplicationModelFactory;
@@ -35,6 +36,7 @@ public class OSMapFragment extends Fragment implements IBackgroudMapFrame {
     private ModelData modelData; // model
     private boolean mapBussy = true; // map ready ?
     TimerUIHelper timerUIHelper; // auto update data from model
+    protected DirectedLocationOverlay myLocationOverlay;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +48,11 @@ public class OSMapFragment extends Fragment implements IBackgroudMapFrame {
         //map.setTileSource(TileSourceFactory.MAPNIK);
         //map.setTileSource(TileSourceFactory.CYCLEMAP);
         map.setTileSource(TileSourceFactory.MAPQUESTOSM);
+
+        // setup mylocation overlay
+        myLocationOverlay = new DirectedLocationOverlay(this.getActivity());
+        map.getOverlays().add(myLocationOverlay);
+
         modelData = ApplicationModelFactory.getModel().getModelData();
 //        map.setBuiltInZoomControls(true);
 //        map.setMultiTouchControls(true);
@@ -60,9 +67,12 @@ public class OSMapFragment extends Fragment implements IBackgroudMapFrame {
     @Override
     public void onResume() {
         super.onResume();
+        map.getController().setZoom(modelData.getCurrentOpenStreetZoom());
+
         if (timerUIHelper != null) {
             timerUIHelper.cancel();
         }
+
         timerUIHelper = new TimerUIHelper(500, new Runnable() {
             @Override
             public void run() {
@@ -78,15 +88,21 @@ public class OSMapFragment extends Fragment implements IBackgroudMapFrame {
         Location location = modelData.getCurrentLocation();
         if (location == null)
             return;
+        myLocationOverlay.setEnabled(true);
+
         GeoPoint startPoint = new GeoPoint(location.getLatitude(), location.getLongitude());
+        myLocationOverlay.setEnabled(true);
         mapController.animateTo(startPoint);
-        map.setMapOrientation(location.getBearing());
-
-
+        myLocationOverlay.setLocation(startPoint);
+        myLocationOverlay.setAccuracy((int)location.getAccuracy());
+        myLocationOverlay.setBearing(location.getBearing());
+        map.setMapOrientation(-location.getBearing());
+        map.invalidate();
     }
 
     @Override
     public void onPause() {
+        modelData.setCurrentOpenStreetZoom(map.getZoomLevel());
         super.onPause();
         if (timerUIHelper != null) {
             timerUIHelper.cancel();
