@@ -20,6 +20,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent intent = this.getIntent();
     }
 
 
@@ -47,6 +48,7 @@ public class MainActivity extends ActionBarActivity {
 
     public void startFullScreen(View view) {
         Intent intent = new Intent(this, FullscreenActivity.class);
+        intent.setAction(FullscreenActivity.START_EMPTY);
         new DisplayToast(App.getInstance(),"Загружаеться карта....",false).run();
         startActivity(intent);
     }
@@ -59,5 +61,20 @@ public class MainActivity extends ActionBarActivity {
             }
         });
         timerHelper.start();
+    }
+
+    public void startFullScreenGmap(View view) {
+        Intent intent = new Intent(this, FullscreenActivity.class);
+        intent.setAction(FullscreenActivity.START_GMAP);
+        new DisplayToast(App.getInstance(),"Загружаеться карта....",false).run();
+        startActivity(intent);
+
+    }
+
+    public void startFullScreenOSMap(View view) {
+        Intent intent = new Intent(this, FullscreenActivity.class);
+        intent.setAction(FullscreenActivity.START_OSAP);
+        new DisplayToast(App.getInstance(),"Загружаеться карта....",false).run();
+        startActivity(intent);
     }
 }

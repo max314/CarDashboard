@@ -1,10 +1,14 @@
 package ru.max314.cardashboard;
 
 import ru.max314.cardashboard.model.ApplicationModelFactory;
+import ru.max314.cardashboard.model.BackgroundEnum;
 import ru.max314.cardashboard.model.ModelData;
 import ru.max314.cardashboard.util.SystemUiHider;
+import ru.max314.cardashboard.view.EmptyFragment;
 import ru.max314.cardashboard.view.GMapFragment;
+import ru.max314.cardashboard.view.IBackgroudFrame;
 import ru.max314.cardashboard.view.IBackgroudMapFrame;
+import ru.max314.cardashboard.view.OSMapFragment;
 import ru.max314.cardashboard.view.SpeedFragment;
 import ru.max314.cardashboard.view.TripSetupDialog;
 import ru.max314.util.LogHelper;
@@ -13,6 +17,9 @@ import ru.max314.util.threads.TimerUIHelper;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,6 +27,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+
+import static ru.max314.cardashboard.model.BackgroundEnum.*;
 
 
 /**
@@ -29,6 +38,9 @@ import android.view.View;
  * @see SystemUiHider
  */
 public class FullscreenActivity extends Activity {
+    public static final String START_EMPTY = "ru.max314.FullscreenActivity.empty";
+    public static final String START_GMAP = "ru.max314.FullscreenActivity.gmap";
+    public static final String START_OSAP = "ru.max314.FullscreenActivity.osmap";
 
     protected static LogHelper Log = new LogHelper(FullscreenActivity.class);
     private ModelData modelData;
@@ -60,8 +72,9 @@ public class FullscreenActivity extends Activity {
      */
     private SystemUiHider mSystemUiHider;
     private SpeedFragment speedFragment;
-    private IBackgroudMapFrame backgroudMapFrame;
+    private BackgroudFrameHolder backgroudFrame;
     TimerUIHelper timerUIHelper;
+    private View contentView;
 
 
     @Override
@@ -72,14 +85,25 @@ public class FullscreenActivity extends Activity {
         setContentView(R.layout.activity_fullscreen);
 
         final View controlsView = findViewById(R.id.fullscreen_content_controls);
-        final View contentView = findViewById(R.id.fullscreen_content);
+
+        contentView = findViewById(R.id.fullscreen_content);
+
         final View speedView = findViewById(R.id.speedFragment);
         final View clockView = findViewById(R.id.clockFragment);
 //        final View backgroundView = findViewById(R.id.frGMapView);
 
-        speedFragment = (SpeedFragment) getFragmentManager().findFragmentById(R.id.speedFragment);
-        //backgroudMapFrame = (GMapFragment) getFragmentManager().findFragmentById(R.id.frMapView);
-        backgroudMapFrame = (IBackgroudMapFrame) getFragmentManager().findFragmentById(R.id.frMapView);
+        //speedFragment = (SpeedFragment) getFragmentManager().findFragmentById(R.id.speedFragment);
+        //backgroudFrame = (GMapFragment) getFragmentManager().findFragmentById(R.id.frMapView);
+        // backgroudFrame = (IBackgroudMapFrame) getFragmentManager().findFragmentById(R.id.frMapView);
+        Intent intent = this.getIntent();
+        if (START_EMPTY.equals(intent.getAction()))
+            createContent(BackgroundEnum.EMPTY);
+        else if(START_GMAP.equals(intent.getAction()))
+                createContent(BackgroundEnum.GOOGLE_MAP);
+        else if(START_OSAP.equals(intent.getAction()))
+                createContent(BackgroundEnum.OPEN_STREET_MAP);
+        else
+            createContent(BackgroundEnum.EMPTY);
 
 
         // Set up an instance of SystemUiHider to control the system UI for
@@ -154,6 +178,28 @@ public class FullscreenActivity extends Activity {
         });
     }
 
+    private void createContent(BackgroundEnum backgroundEnum){
+
+        Fragment fragment = null;
+        switch (backgroundEnum) {
+            case EMPTY:
+                fragment = new EmptyFragment();
+                break;
+            case GOOGLE_MAP:
+                fragment = new GMapFragment();
+                break;
+            case OPEN_STREET_MAP:
+                fragment = new OSMapFragment();
+                break;
+        }
+        if (fragment==null)
+            throw new RuntimeException("Error create background content");
+        this.backgroudFrame = new BackgroudFrameHolder((IBackgroudFrame) fragment);
+        FragmentTransaction transaction = this.getFragmentManager().beginTransaction();
+        transaction.add(contentView.getId(),fragment);
+        transaction.commitAllowingStateLoss();
+    }
+
 
 
 
@@ -207,11 +253,15 @@ public class FullscreenActivity extends Activity {
     }
 
     public void Plus(View view) {
-        backgroudMapFrame.ZoomIn();
+        if (backgroudFrame.isMap()){
+            backgroudFrame.getMap().ZoomIn();
+        }
     }
 
     public void Minus(View view) {
-        backgroudMapFrame.ZoomOut();
+        if (backgroudFrame.isMap()){
+            backgroudFrame.getMap().ZoomOut();
+        }
     }
 
 
@@ -225,5 +275,26 @@ public class FullscreenActivity extends Activity {
         TripSetupDialog tripSetupDialog = new TripSetupDialog();
         tripSetupDialog.show(getFragmentManager(), "trip");
 
+    }
+
+    private class BackgroudFrameHolder{
+        IBackgroudFrame frame;
+
+        private BackgroudFrameHolder(IBackgroudFrame frame) {
+            this.frame = frame;
+        }
+
+        public IBackgroudFrame getValue(){
+            return frame;
+        }
+        public boolean isMap(){
+            return (frame instanceof IBackgroudMapFrame);
+        }
+        public IBackgroudMapFrame getMap(){
+            if (!(frame instanceof IBackgroudMapFrame)){
+                throw new RuntimeException("Bakground frame is not map");
+            }
+            return (IBackgroudMapFrame) frame;
+        }
     }
 }
