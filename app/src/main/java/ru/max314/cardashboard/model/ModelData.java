@@ -30,6 +30,12 @@ public class ModelData {
      */
     private int currentOpenStreetZoom = -1;
 
+    /**
+     * Текущи зум на карте Я
+     */
+    private float currentYaZoom = -1;
+
+
 
     /**
      * Текущая позиция на карте
@@ -103,6 +109,14 @@ public class ModelData {
      */
     public void setCurrentOpenStreetZoom(int currentOpenStreetZoom) {
         this.currentOpenStreetZoom = currentOpenStreetZoom;
+    }
+
+    public float getCurrentYaZoom() {
+        return currentYaZoom;
+    }
+
+    public void setCurrentYaZoom(float currentYaZoom) {
+        this.currentYaZoom = currentYaZoom;
     }
 
     /***

@@ -7,4 +7,5 @@ public enum BackgroundEnum {
     EMPTY, // Пустой фон
     GOOGLE_MAP, // гугла карта
     OPEN_STREET_MAP, // офпен стреет карта
+    YA_MAP, // яндекс карта
 }

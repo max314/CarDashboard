@@ -11,6 +11,7 @@ import ru.max314.cardashboard.view.IBackgroudMapFrame;
 import ru.max314.cardashboard.view.OSMapFragment;
 import ru.max314.cardashboard.view.SpeedFragment;
 import ru.max314.cardashboard.view.TripSetupDialog;
+import ru.max314.cardashboard.view.YaMapFragment;
 import ru.max314.util.LogHelper;
 import ru.max314.util.threads.TimerUIHelper;
 
@@ -41,6 +42,7 @@ public class FullscreenActivity extends Activity {
     public static final String START_EMPTY = "ru.max314.FullscreenActivity.empty";
     public static final String START_GMAP = "ru.max314.FullscreenActivity.gmap";
     public static final String START_OSAP = "ru.max314.FullscreenActivity.osmap";
+    public static final String START_YAMP = "ru.max314.FullscreenActivity.yamap";
 
     protected static LogHelper Log = new LogHelper(FullscreenActivity.class);
     private ModelData modelData;
@@ -102,6 +104,8 @@ public class FullscreenActivity extends Activity {
                 createContent(BackgroundEnum.GOOGLE_MAP);
         else if(START_OSAP.equals(intent.getAction()))
                 createContent(BackgroundEnum.OPEN_STREET_MAP);
+        else if(START_YAMP.equals(intent.getAction()))
+                createContent(BackgroundEnum.YA_MAP);
         else
             createContent(BackgroundEnum.EMPTY);
 
@@ -190,6 +194,9 @@ public class FullscreenActivity extends Activity {
                 break;
             case OPEN_STREET_MAP:
                 fragment = new OSMapFragment();
+                break;
+            case YA_MAP:
+                fragment = new YaMapFragment();
                 break;
         }
         if (fragment==null)

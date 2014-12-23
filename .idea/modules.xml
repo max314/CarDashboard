@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CarDashboard.new.iml" filepath="$PROJECT_DIR$/CarDashboard.new.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yamapkit/yamapkit.iml" filepath="$PROJECT_DIR$/yamapkit/yamapkit.iml" />
     </modules>
   </component>
 </project>
