@@ -6,7 +6,7 @@
         android:id="@+id/yamap"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:apiKey="1234567890"
+        android:apiKey="fPWh4A7f~Ll0c14h7hdggvT2r7JpdkU1MjapkL6PMT7d8cYbYrQ5GwgQi6HA--J4QKrWDBQcohjE-xUKkMmo45LRwrelIc8O2Mjhsy17HgQ="
         android:layout_weight="1"
         />
 

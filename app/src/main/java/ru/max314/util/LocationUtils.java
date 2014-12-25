@@ -24,6 +24,9 @@ public class LocationUtils {
      * @return
      */
     public static boolean isEq(Location location1,Location location2){
+        if (location1==null) return false;
+        if (location2==null) return false;
+
         boolean flag = (FloatUtils.compareDouble(location1.getLatitude(),location2.getLatitude(),DELTA_LOCATION)==0) &&
                 (FloatUtils.compareDouble(location1.getLongitude(),location2.getLongitude(),DELTA_LOCATION)==0);
         return flag;

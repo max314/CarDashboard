@@ -29,6 +29,11 @@
         android:layout_height="wrap_content"
         android:text="startFullScreen open yandex map"
         android:onClick="startFullScreenYAMap" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="startFullScreen open street offline"
+        android:onClick="startFullScreenOSMMF" />
 
     <Button
         android:layout_width="wrap_content"

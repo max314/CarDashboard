@@ -8,6 +8,7 @@ import ru.max314.cardashboard.view.EmptyFragment;
 import ru.max314.cardashboard.view.GMapFragment;
 import ru.max314.cardashboard.view.IBackgroudFrame;
 import ru.max314.cardashboard.view.IBackgroudMapFrame;
+import ru.max314.cardashboard.view.OSMMFFragment;
 import ru.max314.cardashboard.view.OSMapFragment;
 import ru.max314.cardashboard.view.SpeedFragment;
 import ru.max314.cardashboard.view.TripSetupDialog;
@@ -29,8 +30,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 
-import static ru.max314.cardashboard.model.BackgroundEnum.*;
-
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -43,6 +42,7 @@ public class FullscreenActivity extends Activity {
     public static final String START_GMAP = "ru.max314.FullscreenActivity.gmap";
     public static final String START_OSAP = "ru.max314.FullscreenActivity.osmap";
     public static final String START_YAMP = "ru.max314.FullscreenActivity.yamap";
+    public static final String START_OSMMF = "ru.max314.FullscreenActivity.osmmf";
 
     protected static LogHelper Log = new LogHelper(FullscreenActivity.class);
     private ModelData modelData;
@@ -103,9 +103,11 @@ public class FullscreenActivity extends Activity {
         else if(START_GMAP.equals(intent.getAction()))
                 createContent(BackgroundEnum.GOOGLE_MAP);
         else if(START_OSAP.equals(intent.getAction()))
-                createContent(BackgroundEnum.OPEN_STREET_MAP);
+                createContent(BackgroundEnum.OSM_MAP);
         else if(START_YAMP.equals(intent.getAction()))
                 createContent(BackgroundEnum.YA_MAP);
+        else if(START_OSMMF.equals(intent.getAction()))
+                createContent(BackgroundEnum.OSM_MF_MAP);
         else
             createContent(BackgroundEnum.EMPTY);
 
@@ -192,11 +194,14 @@ public class FullscreenActivity extends Activity {
             case GOOGLE_MAP:
                 fragment = new GMapFragment();
                 break;
-            case OPEN_STREET_MAP:
+            case OSM_MAP:
                 fragment = new OSMapFragment();
                 break;
             case YA_MAP:
                 fragment = new YaMapFragment();
+                break;
+            case OSM_MF_MAP:
+                fragment = new OSMMFFragment();
                 break;
         }
         if (fragment==null)

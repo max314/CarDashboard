@@ -85,4 +85,11 @@ public class MainActivity extends ActionBarActivity {
         startActivity(intent);
 
     }
+
+    public void startFullScreenOSMMF(View view) {
+        Intent intent = new Intent(this, FullscreenActivity.class);
+        intent.setAction(FullscreenActivity.START_OSMMF);
+        new DisplayToast(App.getInstance(),"Загружаеться карта....",false).run();
+        startActivity(intent);
+    }
 }

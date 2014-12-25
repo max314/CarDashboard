@@ -14,12 +14,14 @@ import butterknife.InjectView;
 import ru.max314.cardashboard.R;
 import ru.max314.cardashboard.model.ApplicationModelFactory;
 import ru.max314.cardashboard.model.ModelData;
+import ru.max314.util.LogHelper;
 import ru.max314.util.threads.TimerUIHelper;
 
 /**
  * fragment fro display speed and trip
  */
 public class SpeedFragment extends Fragment {
+    protected static LogHelper Log = new LogHelper(SpeedFragment.class);
 
 
     public SpeedFragment() {
