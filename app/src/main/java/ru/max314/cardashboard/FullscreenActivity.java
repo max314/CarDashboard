@@ -47,7 +47,12 @@ public class FullscreenActivity extends SherlockActivity {
     public static final String START_OSMMF = "ru.max314.FullscreenActivity.osmmf";
 
     protected static LogHelper Log = new LogHelper(FullscreenActivity.class);
+
+    /**
+     * модель
+     */
     private ModelData modelData;
+    //region ShowHide
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -75,9 +80,9 @@ public class FullscreenActivity extends SherlockActivity {
      * The instance of the {@link SystemUiHider} for this activity.
      */
     private SystemUiHider mSystemUiHider;
-    private SpeedFragment speedFragment;
+    //endregion
+
     private BackgroudFrameHolder backgroudFrame;
-    TimerUIHelper timerUIHelper;
     private View contentView;
 
 
@@ -94,69 +99,58 @@ public class FullscreenActivity extends SherlockActivity {
 
         final View speedView = findViewById(R.id.speedFragment);
         final View clockView = findViewById(R.id.clockFragment);
-//        final View backgroundView = findViewById(R.id.frGMapView);
 
-        //speedFragment = (SpeedFragment) getFragmentManager().findFragmentById(R.id.speedFragment);
-        //backgroudFrame = (GMapFragment) getFragmentManager().findFragmentById(R.id.frMapView);
-        // backgroudFrame = (IBackgroudMapFrame) getFragmentManager().findFragmentById(R.id.frMapView);
         Intent intent = this.getIntent();
-        if (START_EMPTY.equals(intent.getAction()))
-            createContent(BackgroundEnum.EMPTY);
-        else if(START_GMAP.equals(intent.getAction()))
-                createContent(BackgroundEnum.GOOGLE_MAP);
-        else if(START_OSAP.equals(intent.getAction()))
-                createContent(BackgroundEnum.OSM_MAP);
-        else if(START_YAMP.equals(intent.getAction()))
-                createContent(BackgroundEnum.YA_MAP);
-        else if(START_OSMMF.equals(intent.getAction()))
-                createContent(BackgroundEnum.OSM_MF_MAP);
-        else
-            createContent(BackgroundEnum.EMPTY);
+        createContentByType(intent);
 
 
         // Set up an instance of SystemUiHider to control the system UI for
         // this activity.
         mSystemUiHider = SystemUiHider.getInstance(this, contentView, HIDER_FLAGS);
         mSystemUiHider.setup();
-        mSystemUiHider
-                .setOnVisibilityChangeListener(new SystemUiHider.OnVisibilityChangeListener() {
-                    // Cached values.
-                    int mControlsHeight;
-                    int mShortAnimTime;
+        mSystemUiHider.setOnVisibilityChangeListener(new SystemUiHider.OnVisibilityChangeListener() {
+            // Cached values.
+            int mControlsHeight;
+            int mShortAnimTime;
 
-                    @Override
-                    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-                    public void onVisibilityChange(boolean visible) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-                            // If the ViewPropertyAnimator API is available
-                            // (Honeycomb MR2 and later), use it to animate the
-                            // in-layout UI controls at the bottom of the
-                            // screen.
-                            if (mControlsHeight == 0) {
-                                mControlsHeight = controlsView.getHeight();
-                            }
-                            if (mShortAnimTime == 0) {
-                                mShortAnimTime = getResources().getInteger(
-                                        android.R.integer.config_shortAnimTime);
-                            }
-                            controlsView.animate()
-                                    .translationY(visible ? 0 : mControlsHeight)
-                                    .setDuration(mShortAnimTime);
-                        } else {
-                            // If the ViewPropertyAnimator APIs aren't
-                            // available, simply show or hide the in-layout UI
-                            // controls.
-                            controlsView.setVisibility(visible ? View.VISIBLE : View.GONE);
-
-                        }
-                        speedView.setVisibility(visible ? View.GONE: View.VISIBLE );
-                        clockView.setVisibility(visible ? View.GONE: View.VISIBLE );
-                        if (visible && AUTO_HIDE) {
-                            // Schedule a hide().
-                            delayedHide(AUTO_HIDE_DELAY_MILLIS);
-                        }
+            @Override
+            @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+            public void onVisibilityChange(boolean visible) {
+                Log.d("onVisibilityChange(boolean visible) {: " + visible);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+                    // If the ViewPropertyAnimator API is available
+                    // (Honeycomb MR2 and later), use it to animate the
+                    // in-layout UI controls at the bottom of the
+                    // screen.
+                    Log.d("Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2: true");
+                    if (mControlsHeight == 0) {
+                        mControlsHeight = controlsView.getHeight();
                     }
-                });
+                    if (mShortAnimTime == 0) {
+                        mShortAnimTime = getResources().getInteger(
+                                android.R.integer.config_shortAnimTime);
+                    }
+                    controlsView.animate()
+                            .translationY(visible ? 0 : mControlsHeight)
+                            .setDuration(mShortAnimTime);
+                } else {
+                    // If the ViewPropertyAnimator APIs aren't
+                    // available, simply show or hide the in-layout UI
+                    // controls.
+                    Log.d("Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2: false");
+                    controlsView.setVisibility(visible ? View.VISIBLE : View.GONE);
+
+                }
+                speedView.setVisibility(visible ? View.GONE : View.VISIBLE);
+                clockView.setVisibility(visible ? View.GONE : View.VISIBLE);
+                if (visible && AUTO_HIDE) {
+                    Log.d("if (visible && AUTO_HIDE) {");
+                    // Schedule a hide().
+                    delayedHide(AUTO_HIDE_DELAY_MILLIS);
+                }
+                Log.d("onVisibilityChange }: " + visible);
+            }
+        });
 
         // Set up the user interaction to manually show or hide the system UI.
         contentView.setOnClickListener(new View.OnClickListener() {
@@ -169,6 +163,7 @@ public class FullscreenActivity extends SherlockActivity {
                 }
             }
         });
+
 
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
@@ -184,6 +179,23 @@ public class FullscreenActivity extends SherlockActivity {
                 }
             }
         });
+    }
+
+
+
+    private void createContentByType(Intent intent) {
+        if (START_EMPTY.equals(intent.getAction()))
+            createContent(BackgroundEnum.EMPTY);
+        else if(START_GMAP.equals(intent.getAction()))
+                createContent(BackgroundEnum.GOOGLE_MAP);
+        else if(START_OSAP.equals(intent.getAction()))
+                createContent(BackgroundEnum.OSM_MAP);
+        else if(START_YAMP.equals(intent.getAction()))
+                createContent(BackgroundEnum.YA_MAP);
+        else if(START_OSMMF.equals(intent.getAction()))
+                createContent(BackgroundEnum.OSM_MF_MAP);
+        else
+            createContent(BackgroundEnum.EMPTY);
     }
 
     private void createContent(BackgroundEnum backgroundEnum){
@@ -219,20 +231,29 @@ public class FullscreenActivity extends SherlockActivity {
 
     @Override
     public void onDestroy() {
+        Log.d("public void onDestroy()");
         ApplicationModelFactory.saveModel();
         super.onDestroy();
     }
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
+//    @Override
+//    protected void onPostCreate(Bundle savedInstanceState) {
+//        Log.d("protected void onPostCreate(Bundle savedInstanceState) {");
+//
+//        super.onPostCreate(savedInstanceState);
+//
+//        // Trigger the initial hide() shortly after the activity has been
+//        // created, to briefly hint to the user that UI controls
+//        // are available.
+//        delayedHide(100);
+//    }
 
-        // Trigger the initial hide() shortly after the activity has been
-        // created, to briefly hint to the user that UI controls
-        // are available.
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mSystemUiHider.show();
         delayedHide(100);
     }
-
 
     /**
      * Touch listener to use for in-layout UI controls to delay hiding the
@@ -242,6 +263,7 @@ public class FullscreenActivity extends SherlockActivity {
     View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
+            Log.d("View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {");
             if (AUTO_HIDE) {
                 delayedHide(AUTO_HIDE_DELAY_MILLIS);
             }
@@ -253,6 +275,7 @@ public class FullscreenActivity extends SherlockActivity {
     Runnable mHideRunnable = new Runnable() {
         @Override
         public void run() {
+            Log.d("Runnable mHideRunnable.run()");
             mSystemUiHider.hide();
         }
     };
@@ -262,6 +285,7 @@ public class FullscreenActivity extends SherlockActivity {
      * previously scheduled calls.
      */
     private void delayedHide(int delayMillis) {
+        Log.d("private void delayedHide(int delayMillis) ");
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
