@@ -6,6 +6,8 @@ import android.os.Build;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.actionbarsherlock.app.SherlockActivity;
+
 /**
  * An API 11+ implementation of {@link SystemUiHider}. Uses APIs available in
  * Honeycomb and later (specifically {@link View#setSystemUiVisibility(int)}) to
@@ -109,7 +111,7 @@ public class SystemUiHiderHoneycomb extends SystemUiHiderBase {
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
                     // Pre-Jelly Bean, we must manually hide the action bar
                     // and use the old window flags API.
-                    mActivity.getActionBar().hide();
+                    ActionBarVisible(false);
                     mActivity.getWindow().setFlags(
                             WindowManager.LayoutParams.FLAG_FULLSCREEN,
                             WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -125,7 +127,7 @@ public class SystemUiHiderHoneycomb extends SystemUiHiderBase {
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
                     // Pre-Jelly Bean, we must manually show the action bar
                     // and use the old window flags API.
-                    mActivity.getActionBar().show();
+                    ActionBarVisible(true);
                     mActivity.getWindow().setFlags(
                             0,
                             WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -138,4 +140,22 @@ public class SystemUiHiderHoneycomb extends SystemUiHiderBase {
             }
         }
     };
+
+    private void ActionBarVisible(boolean visible) {
+        if (mActivity instanceof SherlockActivity){
+            SherlockActivity activity = (SherlockActivity) mActivity;
+            if (visible)
+                activity.getSupportActionBar().show();
+            else
+                activity.getSupportActionBar().hide();
+        }
+        else
+        {
+            if (visible)
+                mActivity.getActionBar().show();
+            else
+                mActivity.getActionBar().hide();
+        }
+
+    }
 }

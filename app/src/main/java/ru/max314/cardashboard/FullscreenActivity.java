@@ -30,6 +30,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.actionbarsherlock.app.SherlockActivity;
+
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -37,7 +39,7 @@ import android.view.View;
  *
  * @see SystemUiHider
  */
-public class FullscreenActivity extends Activity {
+public class FullscreenActivity extends SherlockActivity {
     public static final String START_EMPTY = "ru.max314.FullscreenActivity.empty";
     public static final String START_GMAP = "ru.max314.FullscreenActivity.gmap";
     public static final String START_OSAP = "ru.max314.FullscreenActivity.osmap";
@@ -278,15 +280,14 @@ public class FullscreenActivity extends Activity {
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+    public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+        getSupportMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     public void tripSetupClick(MenuItem item) {
         TripSetupDialog tripSetupDialog = new TripSetupDialog();
         tripSetupDialog.show(getFragmentManager(), "trip");
-
     }
 
     private class BackgroudFrameHolder{
