@@ -168,7 +168,9 @@ public class FullscreenActivity extends SherlockActivity {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+        findViewById(R.id.btZoomIn).setOnTouchListener(mDelayHideTouchListener);
+        findViewById(R.id.btZoomOut).setOnTouchListener(mDelayHideTouchListener);
+
         getActionBar().addOnMenuVisibilityListener(new ActionBar.OnMenuVisibilityListener() {
             @Override
             public void onMenuVisibilityChanged(boolean isVisible) {
