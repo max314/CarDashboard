@@ -170,6 +170,13 @@ public class FullscreenActivity extends SherlockActivity {
         // while interacting with the UI.
         findViewById(R.id.btZoomIn).setOnTouchListener(mDelayHideTouchListener);
         findViewById(R.id.btZoomOut).setOnTouchListener(mDelayHideTouchListener);
+        findViewById(R.id.btPreference).setOnTouchListener(mDelayHideTouchListener);
+        findViewById(R.id.btPreference).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tripSetupClick(null);
+            }
+        });
 
         getActionBar().addOnMenuVisibilityListener(new ActionBar.OnMenuVisibilityListener() {
             @Override
@@ -309,6 +316,14 @@ public class FullscreenActivity extends SherlockActivity {
     public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
         getSupportMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    public boolean onMenuItemSelected(int featureId, com.actionbarsherlock.view.MenuItem item) {
+        if (item.getItemId()==R.id.menuItemSetupTrip){
+            tripSetupClick(null);
+        }
+        return super.onMenuItemSelected(featureId, item);
     }
 
     public void tripSetupClick(MenuItem item) {

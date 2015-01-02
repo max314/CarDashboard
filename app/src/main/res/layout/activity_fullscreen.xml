@@ -1,5 +1,4 @@
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,48 +11,47 @@
         android:id="@+id/fullscreen_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:keepScreenOn="true"
         android:gravity="center"
-         >
+        android:keepScreenOn="true">
         <!--<fragment-->
-            <!--android:name="ru.max314.cardashboard.view.GMapFragment"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:id="@+id/frMapView"-->
-            <!--tools:layout="@layout/fragment_gmap" />-->
+        <!--android:name="ru.max314.cardashboard.view.GMapFragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/frMapView"-->
+        <!--tools:layout="@layout/fragment_gmap" />-->
         <!--<fragment-->
-            <!--android:name="ru.max314.cardashboard.view.OSMapFragment"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:id="@+id/frMapView"-->
-            <!--tools:layout="@layout/fragment_osmap" />-->
+        <!--android:name="ru.max314.cardashboard.view.OSMapFragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/frMapView"-->
+        <!--tools:layout="@layout/fragment_osmap" />-->
 
         <!--<TextView android:id="@+id/fullscreen_content1" android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent" android:keepScreenOn="true" android:textColor="#33b5e5"-->
-            <!--android:textStyle="bold" android:textSize="50sp" android:gravity="center"-->
-            <!--android:text="@string/dummy_content" />-->
+        <!--android:layout_height="match_parent" android:keepScreenOn="true" android:textColor="#33b5e5"-->
+        <!--android:textStyle="bold" android:textSize="50sp" android:gravity="center"-->
+        <!--android:text="@string/dummy_content" />-->
 
 
-        </AbsoluteLayout>
+    </AbsoluteLayout>
+
     <fragment
-        android:name="ru.max314.cardashboard.view.SpeedFragment"
         android:id="@+id/speedFragment"
-        android:layout_gravity="right|top"
-        android:layout_height="wrap_content"
+        android:name="ru.max314.cardashboard.view.SpeedFragment"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|top"
         android:layout_marginRight="6dp"
         android:layout_marginTop="16dp"
-        tools:layout="@layout/fragment_speed"
-        />
+        tools:layout="@layout/fragment_speed" />
 
     <fragment
         android:id="@+id/clockFragment"
         android:name="ru.max314.cardashboard.view.ClockFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-14dp"
-        android:layout_marginLeft="50dp"
         android:layout_gravity="left|top"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="-14dp"
         tools:layout="@layout/fragment_clock" />
 
     <!-- This FrameLayout insets its children based on system windows using
@@ -64,40 +62,60 @@
         android:fitsSystemWindows="true">
 
         <!--<LinearLayout android:id="@+id/fullscreen_content_controls" style="?metaButtonBarStyle"-->
-        <LinearLayout android:id="@+id/fullscreen_content_controls"
-            android:layout_width="match_parent" android:layout_height="wrap_content"
+        <LinearLayout
+            android:id="@+id/fullscreen_content_controls"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay" android:orientation="vertical"
+            android:background="@color/black_overlay"
+            android:orientation="horizontal"
             tools:ignore="UselessParent">
 
-            <!--<Button android:id="@+id/dummy_button"-->
-                <!--android:layout_width="wrap_content" android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1" android:text="+" android:onClick="Plus"-->
-                <!--/>-->
-            <!--<Button android:id="@+id/dummy_button2"-->
-                <!--android:layout_width="wrap_content" android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1" android:text="-" android:onClick="Minus"-->
-                <!--/>-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/btZoomIn"
-                android:layout_width="84dp"
-                android:layout_height="84dp"
-                android:src="@drawable/old_zoom_in"
-                android:scaleType="fitCenter"
-                android:onClick="Plus" />
-            <ImageButton
-                android:id="@+id/btZoomOut"
-                android:layout_width="84dp"
-                android:layout_height="84dp"
-                android:src="@drawable/old_zoom_out"
-                android:scaleType="fitCenter"
-                android:onClick="Minus" />
-            <!--<Button android:id="@+id/dummy_button" style="?metaButtonBarStyle"-->
-                <!--android:layout_width="wrap_content" android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1" android:text="tttt" android:onClick="ttt"-->
-                <!--/>-->
+                <ImageButton
+                    android:id="@+id/btZoomIn"
+                    android:layout_width="84dp"
+                    android:layout_height="84dp"
+                    android:onClick="Plus"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/old_zoom_in" />
+
+                <ImageButton
+                    android:id="@+id/btZoomOut"
+                    android:layout_width="84dp"
+                    android:layout_height="84dp"
+                    android:onClick="Minus"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/old_zoom_out" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+
+                >
+
+                <ImageButton
+                    android:id="@+id/btPreference"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_gravity="right|center_vertical"
+                    android:onClick="Minus"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/gtk_preferences" />
+            </FrameLayout>
+
         </LinearLayout>
+
+        <!--<Button android:id="@+id/dummy_button" style="?metaButtonBarStyle"-->
+        <!--android:layout_width="wrap_content" android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1" android:text="tttt" android:onClick="ttt"-->
+        <!--/>-->
     </FrameLayout>
 
 </FrameLayout>

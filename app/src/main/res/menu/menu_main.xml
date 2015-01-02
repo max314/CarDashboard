@@ -6,7 +6,5 @@
         android:id="@+id/menuItemSetupTrip"
         android:title="Пробег(настройка)"
         android:orderInCategory="100"
-
-
         />
 </menu>
