@@ -102,7 +102,7 @@ public class OSMMFFragment extends Fragment implements IBackgroudMapFrame {
      * @return a map file
      */
     protected File getMapFile() {
-        File file = new File(getMapFileDirectory(), "germany.map");
+        File file = new File(getMapFileDirectory(), "rostov+.map");
         return file;
     }
 

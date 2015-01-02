@@ -41,7 +41,7 @@ public class LocationLogger extends EntityLogger<Location> {
                 String formatted = format.format(date);
                 s.append(formatted+";");
                 //endregion
-                s.append(String.format("%.6f;%.6f;", entity.getLatitude(), entity.getLongitude()));
+                s.append(String.format("%f;%f;", entity.getLatitude(), entity.getLongitude()));
                 s.append(String.format("%.0f;", entity.getAccuracy()));
                 s.append(entity.getAltitude()+";");
                 s.append(entity.getSpeed() + ";");
