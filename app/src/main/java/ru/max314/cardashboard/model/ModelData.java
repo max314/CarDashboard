@@ -20,15 +20,6 @@ import java.util.Date;
  */
 public class ModelData {
 
-    /**
-     * Текущи зум на карте
-     */
-    private float currentZoom = -1;
-
-    /**
-     * Текущи зум на карте open street
-     */
-    private int currentOpenStreetZoom = -1;
 
     /**
      * Текущи зум на карте Я
@@ -78,38 +69,6 @@ public class ModelData {
     Date currentDate = null;
 
 
-    /**
-     * Зумм карты
-     * @return
-     */
-    public float getCurrentZoom() {
-        return currentZoom;
-    }
-
-    /**
-     * Зумм карты
-     * @param currentZoom
-     */
-    public void setCurrentZoom(float currentZoom) {
-        this.currentZoom = currentZoom;
-    }
-
-
-    /***
-     * Текущей зум openStreet
-     * @return
-     */
-    public int getCurrentOpenStreetZoom() {
-        return currentOpenStreetZoom;
-    }
-
-    /***
-     * Текущей зум openStreet
-     * @return
-     */
-    public void setCurrentOpenStreetZoom(int currentOpenStreetZoom) {
-        this.currentOpenStreetZoom = currentOpenStreetZoom;
-    }
 
     public float getCurrentYaZoom() {
         return currentYaZoom;
@@ -219,6 +178,19 @@ public class ModelData {
 
     public void setCurrentDate(Date currentDate) {
         this.currentDate = currentDate;
+    }
+
+    /**
+     * Вернуть левый локайшен для старта
+     * @return
+     */
+    public Location getDefaultLocation(){
+        Location loc =  new Location("faeke");
+        loc.setLatitude(47.20140598);
+        loc.setLongitude(38.92323017);
+        loc.setAccuracy(30);
+        loc.setSpeed(10);
+        return loc;
     }
 
 }

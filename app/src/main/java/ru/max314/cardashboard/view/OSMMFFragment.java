@@ -1,6 +1,7 @@
 package ru.max314.cardashboard.view;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.net.Uri;
@@ -77,8 +78,8 @@ public class OSMMFFragment extends Fragment implements IBackgroudMapFrame {
         this.mapView.setClickable(true);
         this.mapView.getMapScaleBar().setVisible(true);
         this.mapView.setBuiltInZoomControls(true);
-        this.mapView.getMapZoomControls().setZoomLevelMin((byte) 10);
-        this.mapView.getMapZoomControls().setZoomLevelMax((byte) 20);
+        this.mapView.getMapZoomControls().setZoomLevelMin((byte) 8);
+        this.mapView.getMapZoomControls().setZoomLevelMax((byte) 18);
 
         // create a tile cache of suitable size
         this.tileCache = AndroidUtil.createTileCache(this.getActivity(), "mapcache",
@@ -110,8 +111,8 @@ public class OSMMFFragment extends Fragment implements IBackgroudMapFrame {
     public void onStart() {
         super.onStart();
 
-        this.mapView.getModel().mapViewPosition.setCenter(new LatLong(47.1673097, 38.10058594));
-        this.mapView.getModel().mapViewPosition.setZoomLevel((byte) 12);
+//        this.mapView.getModel().mapViewPosition.setCenter(new LatLong(47.1673097, 38.10058594));
+//        this.mapView.getModel().mapViewPosition.setZoomLevel((byte) 12);
 
         // tile renderer layer using internal render theme
         this.tileRendererLayer = new TileRendererLayer(tileCache,
@@ -131,20 +132,25 @@ public class OSMMFFragment extends Fragment implements IBackgroudMapFrame {
         myLocationOverlay.enableMyLocation(true);
 
         this.mapView.getLayerManager().getLayers().add(myLocationOverlay);
-
-
     }
+
+    private final String PREF_ZOOM = "OSMMF_ZOOM";
+    private final String PREF_LAN = "OSMMF_LAN";
+    private final String PREF_LON = "OSMMF_LON";
 
     @Override
     public void onResume() {
         super.onResume();
-
-//    map.getController().setZoom(modelData.getCurrentOpenStreetZoom());
-
+        SharedPreferences pref = getActivity().getPreferences(getActivity().MODE_PRIVATE);
+        this.mapView.getModel().mapViewPosition.setZoomLevel((byte) pref.getInt(PREF_ZOOM, 12));
+        LatLong center = new LatLong(
+                pref.getFloat(PREF_LAN, (float) modelData.getDefaultLocation().getLatitude()),
+                pref.getFloat(PREF_LON, (float) modelData.getDefaultLocation().getLongitude())
+        );
+        this.mapView.getModel().mapViewPosition.setCenter(center);
     if (timerUIHelper != null) {
         timerUIHelper.cancel();
     }
-
     timerUIHelper = new TimerUIHelper(500, new Runnable() {
         @Override
         public void run() {
@@ -168,6 +174,14 @@ public class OSMMFFragment extends Fragment implements IBackgroudMapFrame {
     public void onPause() {
 //        modelData.setCurrentOpenStreetZoom(map.getZoomLevel());
         super.onPause();
+        SharedPreferences pref = getActivity().getPreferences(getActivity().MODE_PRIVATE);
+        SharedPreferences.Editor ed = pref.edit();
+        ed.putInt(PREF_ZOOM,mapView.getModel().mapViewPosition.getZoomLevel());
+        LatLong center  = this.mapView.getModel().mapViewPosition.getCenter();
+        ed.putFloat(PREF_LAN, (float) center.latitude);
+        ed.putFloat(PREF_LON, (float) center.longitude);
+        ed.commit();
+
         if (timerUIHelper != null) {
             timerUIHelper.cancel();
             timerUIHelper = null;

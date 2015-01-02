@@ -1,6 +1,7 @@
 package ru.max314.cardashboard.view;
 
 
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import org.mapsforge.core.model.LatLong;
+import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
@@ -59,6 +62,10 @@ public class OSMapFragment extends Fragment implements IBackgroudMapFrame {
         return view;
     }
 
+    private final String PREF_ZOOM = "OSM_ZOOM";
+    private final String PREF_LAN = "OSM_LAN";
+    private final String PREF_LON = "OSM_LON";
+
     /**
      * Called when the fragment is visible to the user and actively running.
      * This is generally
@@ -67,19 +74,24 @@ public class OSMapFragment extends Fragment implements IBackgroudMapFrame {
     @Override
     public void onResume() {
         super.onResume();
-        map.getController().setZoom(modelData.getCurrentOpenStreetZoom());
+
+        SharedPreferences pref = getActivity().getPreferences(getActivity().MODE_PRIVATE);
+        this.map.getController().setZoom(pref.getInt(PREF_ZOOM, 12));
+        GeoPoint center = new GeoPoint(
+                pref.getFloat(PREF_LAN, (float) modelData.getDefaultLocation().getLatitude()),
+                pref.getFloat(PREF_LON, (float) modelData.getDefaultLocation().getLongitude())
+        );
+        this.map.getController().setCenter(center);
 
         if (timerUIHelper != null) {
             timerUIHelper.cancel();
         }
-
         timerUIHelper = new TimerUIHelper(500, new Runnable() {
             @Override
             public void run() {
                 updateData();
             }
         });
-
     }
 
     private void updateData() {
@@ -102,8 +114,17 @@ public class OSMapFragment extends Fragment implements IBackgroudMapFrame {
 
     @Override
     public void onPause() {
-        modelData.setCurrentOpenStreetZoom(map.getZoomLevel());
+
         super.onPause();
+
+        SharedPreferences pref = getActivity().getPreferences(getActivity().MODE_PRIVATE);
+        SharedPreferences.Editor ed = pref.edit();
+        ed.putInt(PREF_ZOOM,map.getZoomLevel());
+        IGeoPoint center  = this.map.getMapCenter();
+        ed.putFloat(PREF_LAN, (float) center.getLatitude());
+        ed.putFloat(PREF_LON, (float) center.getLongitude());
+        ed.commit();
+
         if (timerUIHelper != null) {
             timerUIHelper.cancel();
             timerUIHelper = null;

@@ -1,6 +1,7 @@
 package ru.max314.cardashboard.view;
 
 
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -17,6 +18,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 
+import org.osmdroid.api.IGeoPoint;
+import org.osmdroid.util.GeoPoint;
+
 import ru.max314.cardashboard.R;
 import ru.max314.cardashboard.model.ApplicationModelFactory;
 import ru.max314.cardashboard.model.ModelData;
@@ -32,6 +36,7 @@ public class GMapFragment extends Fragment implements IBackgroudMapFrame {
     private GoogleMap googleMap; // Might be null if Google Play services APK is not available.
     private ModelData modelData; // model
     private boolean mapBussy = true; // map ready ?
+    private boolean firstStart = true;
     TimerUIHelper timerUIHelper; // auto update data from model
 
 
@@ -82,12 +87,34 @@ public class GMapFragment extends Fragment implements IBackgroudMapFrame {
         mapBussy = false; // карта готова страдать
     }
 
+    private final String PREF_ZOOM = "CMAP_ZOOM";
+    private final String PREF_LAN = "CMAP_LAN";
+    private final String PREF_LON = "CMAP_LON";
+
     /**
      * Данные были изменены в модели чейнить делаем
      */
     private void updateData() {
         if (mapBussy) // карта не готова уходим отседова
             return;
+        if (firstStart){
+            // при первой загрузке востановим данные
+            SharedPreferences pref = getActivity().getPreferences(getActivity().MODE_PRIVATE);
+            LatLng center = new LatLng(
+                    pref.getFloat(PREF_LAN, (float) modelData.getDefaultLocation().getLatitude()),
+                    pref.getFloat(PREF_LON, (float) modelData.getDefaultLocation().getLongitude())
+            );
+            CameraPosition cameraPosition = new CameraPosition.Builder()
+                    .target(center)
+                    .zoom(pref.getFloat(PREF_ZOOM, 12.0f))
+                    .tilt(30)
+                    .build();
+            mapBussy = true;
+            googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition), new GMapCancell());
+            firstStart = false;
+            return;
+        }
+
         Location location = modelData.getCurrentLocation();
         if (location == null)
             return;
@@ -95,13 +122,12 @@ public class GMapFragment extends Fragment implements IBackgroudMapFrame {
         LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(loc)
-                .zoom(modelData.getCurrentZoom())
                 .bearing(location.getBearing())
+                .zoom(googleMap.getCameraPosition().zoom)
                 .tilt(30)
                 .build();
         mapBussy = true;
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition), new GMapCancell());
-
     }
 
     /**
@@ -110,7 +136,7 @@ public class GMapFragment extends Fragment implements IBackgroudMapFrame {
     @Override
     public void ZoomIn() {
         float zoom = googleMap.getCameraPosition().zoom + 1;
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(zoom), new GMapCancellZoom());
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(zoom), new GMapCancell());
     }
 
     /**
@@ -119,7 +145,7 @@ public class GMapFragment extends Fragment implements IBackgroudMapFrame {
     @Override
     public void ZoomOut() {
         float zoom = googleMap.getCameraPosition().zoom - 1;
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(zoom), new GMapCancellZoom());
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(zoom), new GMapCancell());
     }
 
     //region Overrides
@@ -142,6 +168,16 @@ public class GMapFragment extends Fragment implements IBackgroudMapFrame {
     public void onPause() {
         mapView.onPause();
         super.onPause();
+
+        SharedPreferences pref = getActivity().getPreferences(getActivity().MODE_PRIVATE);
+        SharedPreferences.Editor ed = pref.edit();
+        ed.putFloat(PREF_ZOOM,googleMap.getCameraPosition().zoom);
+        LatLng center  = this.googleMap.getCameraPosition().target;
+        ed.putFloat(PREF_LAN, (float) center.latitude);
+        ed.putFloat(PREF_LON, (float) center.longitude);
+        ed.commit();
+        firstStart = true;
+
         if (timerUIHelper != null) {
             timerUIHelper.cancel();
             timerUIHelper = null;
@@ -157,7 +193,6 @@ public class GMapFragment extends Fragment implements IBackgroudMapFrame {
     @Override
     public void onSaveInstanceState(Bundle b) {
         super.onSaveInstanceState(b);
-        modelData.setCurrentZoom(googleMap.getCameraPosition().zoom);
         mapView.onSaveInstanceState(b);
     }
 
@@ -190,22 +225,4 @@ public class GMapFragment extends Fragment implements IBackgroudMapFrame {
             mapBussy = false;
         }
     }
-
-    /**
-     * Implement GoogleMap.CancelableCallback on end set zoom in model
-     */
-    private class GMapCancellZoom extends GMapCancell {
-        @Override
-        public void onFinish() {
-            super.onFinish();
-            modelData.setCurrentZoom(googleMap.getCameraPosition().zoom);
-        }
-
-        @Override
-        public void onCancel() {
-            super.onCancel();
-            modelData.setCurrentZoom(googleMap.getCameraPosition().zoom);
-        }
-    }
-    //endregion
 }
