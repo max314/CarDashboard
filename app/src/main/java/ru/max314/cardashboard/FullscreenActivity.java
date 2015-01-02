@@ -241,7 +241,7 @@ public class FullscreenActivity extends SherlockActivity {
     @Override
     public void onDestroy() {
         Log.d("public void onDestroy()");
-        ApplicationModelFactory.saveModel();
+        ApplicationModelFactory.getModel().saveAll();
         super.onDestroy();
     }
 
