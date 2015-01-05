@@ -17,6 +17,11 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.DirectedLocationOverlay;
+import org.osmdroid.views.overlay.ScaleBarOverlay;
+import org.osmdroid.views.overlay.compass.CompassOverlay;
+import org.osmdroid.views.overlay.compass.IOrientationConsumer;
+import org.osmdroid.views.overlay.compass.IOrientationProvider;
+import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider;
 
 import ru.max314.cardashboard.R;
 import ru.max314.cardashboard.model.ApplicationModelFactory;
@@ -39,7 +44,8 @@ public class OSMapFragment extends Fragment implements IBackgroudMapFrame {
     private ModelData modelData; // model
     private boolean mapBussy = true; // map ready ?
     TimerUIHelper timerUIHelper; // auto update data from model
-    protected DirectedLocationOverlay myLocationOverlay;
+    private  DirectedLocationOverlay myLocationOverlay;
+    private  myOrient myOrient = new myOrient();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,6 +61,16 @@ public class OSMapFragment extends Fragment implements IBackgroudMapFrame {
         // setup mylocation overlay
         myLocationOverlay = new DirectedLocationOverlay(this.getActivity());
         map.getOverlays().add(myLocationOverlay);
+        // Scale bar
+        ScaleBarOverlay myScaleBarOverlay = new ScaleBarOverlay(this.getActivity());
+        myScaleBarOverlay.setScaleBarOffset(myScaleBarOverlay.screenWidth-130,myScaleBarOverlay.screenHeight-30);
+        map.getOverlays().add(myScaleBarOverlay);
+        // compas
+
+        CompassOverlay compassOverlay = new CompassOverlay(this.getActivity(),myOrient , map);
+        compassOverlay.enableCompass();
+        map.getOverlays().add(compassOverlay);
+
 
         modelData = ApplicationModelFactory.getModel().getModelData();
 //        map.setBuiltInZoomControls(true);
@@ -106,9 +122,10 @@ public class OSMapFragment extends Fragment implements IBackgroudMapFrame {
         myLocationOverlay.setEnabled(true);
         mapController.animateTo(startPoint);
         myLocationOverlay.setLocation(startPoint);
-        myLocationOverlay.setAccuracy((int)location.getAccuracy());
+        myLocationOverlay.setAccuracy((int) location.getAccuracy());
         myLocationOverlay.setBearing(location.getBearing());
         map.setMapOrientation(-location.getBearing());
+        myOrient.setOrientation(location.getBearing());
         map.invalidate();
     }
 
@@ -150,6 +167,31 @@ public class OSMapFragment extends Fragment implements IBackgroudMapFrame {
         mapController.zoomOut();
     }
 
+private class myOrient implements IOrientationProvider{
 
+    private float orientation;
+    private IOrientationConsumer mOrientationConsumer;
+
+    @Override
+    public boolean startOrientationProvider(IOrientationConsumer orientationConsumer) {
+        mOrientationConsumer = orientationConsumer;
+        return true;
+    }
+
+    @Override
+    public void stopOrientationProvider() {
+        mOrientationConsumer = null;
+    }
+
+    @Override
+    public float getLastKnownOrientation() {
+        return orientation;
+    }
+
+    public void setOrientation(float orientation) {
+        this.orientation = orientation;
+        mOrientationConsumer.onOrientationChanged(orientation,this);
+    }
+}
 
 }
