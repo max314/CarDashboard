@@ -3,6 +3,7 @@ package ru.max314.cardashboard;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,8 +11,11 @@ import android.view.View;
 
 import com.actionbarsherlock.app.SherlockActivity;
 
+import java.util.Locale;
+
 import ru.max314.cardashboard.model.ApplicationModelFactory;
 import ru.max314.util.DisplayToast;
+import ru.max314.util.SpeechUtils;
 import ru.max314.util.threads.TimerHelper;
 
 
@@ -22,6 +26,7 @@ public class MainActivity extends SherlockActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Intent intent = this.getIntent();
+        SpeechUtils.speech("Привет. Мы, приложение car dashboard запустились.",true);
     }
 
 
@@ -54,20 +59,59 @@ public class MainActivity extends SherlockActivity {
         startActivity(intent);
     }
 
-    public void StartTimer(View view) {
-        TimerHelper timerHelper = new TimerHelper("foo",0,1*10,new Runnable() {
-            @Override
-            public void run() {
-                Log.d("timer","timer");
+    private final int MY_DATA_CHECK_CODE = 100;
+    private TextToSpeech textToSpeech;
+
+    public void TestSpeechInstall(View view) {
+        Intent checkIntent = new Intent();
+        checkIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+        startActivityForResult(checkIntent, MY_DATA_CHECK_CODE);
+    }
+    protected void onActivityResult(
+            int requestCode, int resultCode, Intent data) {
+        if (requestCode == MY_DATA_CHECK_CODE) {
+            if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
+                // success, create the TTS instance
+                if (textToSpeech == null){
+                    textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+                        @Override
+                        public void onInit(int status) {
+                            if (status == TextToSpeech.SUCCESS){
+                                textToSpeech.setLanguage(new Locale("ru","RU"));
+                                textToSpeech.setSpeechRate(0.8f);
+                                textToSpeech.playEarcon("Проверка голосового движка. раз два три",TextToSpeech.QUEUE_FLUSH, null);
+                                textToSpeech.speak("Проверка голосового движка. раз два три",TextToSpeech.QUEUE_ADD, null);
+                            }
+                            else {
+                                new DisplayToast(App.getInstance(),"Error init test to speech engine: "+status,false).run();
+                            }
+
+                        }
+                    });
+                }
+                else {
+                    textToSpeech.speak("Хозяин.",TextToSpeech.QUEUE_FLUSH, null);
+                    textToSpeech.playSilence(750, TextToSpeech.QUEUE_ADD, null);
+                    textToSpeech.speak("Кто зздеся", TextToSpeech.QUEUE_ADD, null);
+
+
+                    //textToSpeech.speak("Проверка голосового движка. раз два три",TextToSpeech.QUEUE_ADD, null);
+                }
+            } else {
+                // missing data, install it
+                Intent installIntent = new Intent();
+                installIntent.setAction(
+                        TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
+                startActivity(installIntent);
             }
-        });
-        timerHelper.start();
+        }
     }
 
     public void startFullScreenGmap(View view) {
         Intent intent = new Intent(this, FullscreenActivity.class);
         intent.setAction(FullscreenActivity.START_GMAP);
         new DisplayToast(App.getInstance(),"Загружаеться карта....",false).run();
+        SpeechUtils.speech("Запуск гугло карты",true);
         startActivity(intent);
 
     }
@@ -76,6 +120,7 @@ public class MainActivity extends SherlockActivity {
         Intent intent = new Intent(this, FullscreenActivity.class);
         intent.setAction(FullscreenActivity.START_OSAP);
         new DisplayToast(App.getInstance(),"Загружаеться карта....",false).run();
+        SpeechUtils.speech("Запуск open street map карты",true);
         startActivity(intent);
     }
 
@@ -83,6 +128,7 @@ public class MainActivity extends SherlockActivity {
         Intent intent = new Intent(this, FullscreenActivity.class);
         intent.setAction(FullscreenActivity.START_YAMP);
         new DisplayToast(App.getInstance(),"Загружаеться карта....",false).run();
+        SpeechUtils.speech("Запуск Яндекс карты.",true);
         startActivity(intent);
 
     }
@@ -91,6 +137,12 @@ public class MainActivity extends SherlockActivity {
         Intent intent = new Intent(this, FullscreenActivity.class);
         intent.setAction(FullscreenActivity.START_OSMMF);
         new DisplayToast(App.getInstance(),"Загружаеться карта....",false).run();
+        SpeechUtils.speech("Запуск open street map карты. режим карта офлайн",true);
         startActivity(intent);
+    }
+
+    public void TestSpeech(View view) {
+        //SpeechUtils.speech("Привет. Мы, приложение car dashboard запустились. Считаем 1 2 3 4",true);
+        SpeechUtils.speech("Местоположение GPS. статус. запущенно",true);
     }
 }

@@ -38,10 +38,14 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Thread start"
-        android:id="@+id/button1"
-        android:onClick="StartTimer" />
+        android:text="Speech ready test"
+        android:onClick="TestSpeechInstall" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Speech test"
+        android:onClick="TestSpeech" />
 
 
 </LinearLayout>

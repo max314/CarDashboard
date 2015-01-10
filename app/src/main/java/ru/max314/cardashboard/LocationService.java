@@ -10,13 +10,14 @@ import android.os.Looper;
 
 import ru.max314.cardashboard.model.ModelData;
 import ru.max314.util.LogHelper;
+import ru.max314.util.SpeechUtils;
 
 /**
  * Created by max on 15.12.2014.
  */
 
 public class LocationService extends Thread {
-    LogHelper Log = new LogHelper(LocationService.class);
+    static LogHelper Log = new LogHelper(LocationService.class);
     LocationProcessing locationProcessing = null;
     private Handler handler;
 
@@ -31,6 +32,7 @@ public class LocationService extends Thread {
     public void run() {
         try {
             Log.d("run");
+            SpeechUtils.speech("Запуск потока отслеживание местоположения",false);
             Looper.prepare();
             handler = new Handler();
             locationProcessing.up();
@@ -71,12 +73,15 @@ public class LocationService extends Thread {
                 public void onGpsStatusChanged(int event) {
                     switch (event) {
                         case GpsStatus.GPS_EVENT_STARTED:
+                            SpeechUtils.speech("GPS статус. запущенно",false);
                             // do your tasks
                             break;
                         case GpsStatus.GPS_EVENT_FIRST_FIX:
+                            SpeechUtils.speech("GPS статус. первая фиксация",false);
                             // do your tasks
                             break;
                         case GpsStatus.GPS_EVENT_STOPPED:
+                            SpeechUtils.speech("GPS статус. остановленно",false);
                             // do your tasks
                             break;
                     }
@@ -144,6 +149,7 @@ public class LocationService extends Thread {
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
             Log.d(String.format("onStatusChanged: provider %s", provider));
+            SpeechUtils.speech("Местоположение. статус изменен",true);
             modelData.setCurrentLocationStatus(status);
         }
 
@@ -155,6 +161,7 @@ public class LocationService extends Thread {
          */
         @Override
         public void onProviderEnabled(String provider) {
+            SpeechUtils.speech("Местоположение. провайдер доступен "+provider,true);
             Log.d("onProviderEnabled: provider "+provider);
         }
 
@@ -168,6 +175,7 @@ public class LocationService extends Thread {
          */
         @Override
         public void onProviderDisabled(String provider) {
+            SpeechUtils.speech("Местоположение . провайде отключен "+provider,true);
             Log.d("onProviderDisabled: provider "+provider);
 
         }
