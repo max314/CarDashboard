@@ -11,6 +11,24 @@
 - Управление музыкой
   - кнопки (универсально)
   - полное для купленого (кнопки + фрагмент с песней)
+- реализовать сброс gps
+  смотреть Передергивайте программно http://youtu.be/bZCqBzqvsXk
+  android.permission.ACCESS_LOCATION_EXTRA_COMMANDS
+
+     public static void downloadGPSXtra(Context context)
+  {
+
+          LocationManager locationmanager = (LocationManager)context.getSystemService("location");
+          Bundle bundle = new Bundle();
+          locationmanager.sendExtraCommand("gps", "force_xtra_injection", bundle);
+          locationmanager.sendExtraCommand("gps", "force_time_injection", bundle);
+
+  }
+  Bundle  extras = new Bundle();
+
+  extras.putBoolean("all", true);
+  locManager.sendExtraCommand("gps", "delete_aiding_data", extras);
+
 
 далекое
 - приебашить ODB (решить как тортуга или нативно)

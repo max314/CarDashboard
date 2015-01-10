@@ -11,9 +11,13 @@ import android.view.ViewGroup;
 
 
 import org.mapsforge.core.model.LatLong;
+import org.osmdroid.ResourceProxy;
 import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.api.IMapController;
+import org.osmdroid.tileprovider.MapTile;
+import org.osmdroid.tileprovider.tilesource.OnlineTileSourceBase;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.tileprovider.tilesource.XYTileSource;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.DirectedLocationOverlay;
@@ -35,6 +39,24 @@ import ru.max314.util.threads.TimerUIHelper;
 public class OSMapFragment extends Fragment implements IBackgroudMapFrame {
     protected static LogHelper Log = new LogHelper(OSMapFragment.class);
 
+    public class MyTileSource extends XYTileSource {
+
+        public MyTileSource(String aName, ResourceProxy.string aResourceId, int aZoomMinLevel,
+                            int aZoomMaxLevel, int aTileSizePixels,
+                            String aImageFilenameEnding, String... aBaseUrl) {
+            super(aName, aResourceId, aZoomMinLevel, aZoomMaxLevel,
+                    aTileSizePixels, aImageFilenameEnding, aBaseUrl);
+
+        }
+        //переопределим метод getTileURLString, он будет возвращать ссылку на тайл карты
+        @Override
+        public String getTileURLString(MapTile aTile) {
+
+            return String.format(getBaseUrl(), aTile.getX(), aTile.getY(),
+                    aTile.getZoomLevel());
+        }
+
+    }
 
     public OSMapFragment() {
         // Required empty public constructor
@@ -54,9 +76,35 @@ public class OSMapFragment extends Fragment implements IBackgroudMapFrame {
         View view = inflater.inflate(R.layout.fragment_osmap, container, false);
 
         map = (MapView) view.findViewById(R.id.frOSMapView);
-        //map.setTileSource(TileSourceFactory.MAPNIK);
+        map.setTileSource(TileSourceFactory.MAPNIK);
         //map.setTileSource(TileSourceFactory.CYCLEMAP);
-        map.setTileSource(TileSourceFactory.MAPQUESTOSM);
+//        map.setTileSource(TileSourceFactory.MAPQUESTOSM);
+//            map.setTileSource(new OnlineTileSourceBase("Google Maps", ResourceProxy.string.unknown, 1, 20, 256, ".png",
+//                    new String[]{"http://mt3.google.com/vt/v=w2.97"}) {
+//            @Override
+//            public String getTileURLString(final MapTile aTile) {
+/*
+* GOOGLE MAPS URL looks like
+* base url const x y zoom
+* http://mt3.google.com/vt/v=w2.97&x=74327&y=50500&z=17
+*/
+//                return getBaseUrl() + "&x=" + aTile.getX() + "&y=" + aTile.getY() + "&z=" + aTile.getZoomLevel();
+//            }
+//        });
+//            map.setTileSource(new MyTileSource("Google Maps", ResourceProxy.string.unknown, 1, 20, 256, ".png",
+//                    "http://vec04.maps.yandex.net/tiles?l=map&v=4.28.0&x=%s&y=%s&z=%s&lang=ru-RU",
+//                    "http://vec03.maps.yandex.net/tiles?l=map&v=4.28.0&x=%s&y=%s&z=%s&lang=ru-RU",
+//                    "http://vec02.maps.yandex.net/tiles?l=map&v=4.28.0&x=%s&y=%s&z=%s&lang=ru-RU",
+//                    "http://vec01.maps.yandex.net/tiles?l=map&v=4.28.0&x=%s&y=%s&z=%s&lang=ru-RU" ));
+//            map.setTileSource(new MyTileSource("Google Maps", ResourceProxy.string.unknown, 1, 20, 256, ".png",
+//                    "http://mt0.google.com/vt/lyrs=m&hl=ru&gl=RU&x=%s&y=%s&z=%s&s=Galileo",
+//                    "http://mt1.google.com/vt/lyrs=m&hl=ru&gl=RU&x=%s&y=%s&z=%s&s=Galileo",
+//                    "http://mt2.google.com/vt/lyrs=m&hl=ru&gl=RU&x=%s&y=%s&z=%s&s=Galileo",
+//                    "http://mt3.google.com/vt/lyrs=m&hl=ru&gl=RU&x=%s&y=%s&z=%s&s=Galileo" ));
+//        map.setTileSource(new MyTileSource("ya", ResourceProxy.string.unknown, 1, 20, 256, ".png",
+//                "http://jgo.maps.yandex.net/1.1/tiles?l=trf%2Ctrfe&x=%s&y=%s&z=%s&tm=1420457338"
+//                 ));
+//        http://jgo.maps.yandex.net/1.1/tiles?l=trf%2Ctrfe&x=2493&y=1439&z=12&tm=1420457338
 
         // setup mylocation overlay
         myLocationOverlay = new DirectedLocationOverlay(this.getActivity());

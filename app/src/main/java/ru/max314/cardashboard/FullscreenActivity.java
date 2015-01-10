@@ -22,6 +22,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -29,6 +30,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 
@@ -174,7 +176,7 @@ public class FullscreenActivity extends SherlockActivity {
         findViewById(R.id.btPreference).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tripSetupClick(null);
+                openOptionsMenu();
             }
         });
 
@@ -321,15 +323,61 @@ public class FullscreenActivity extends SherlockActivity {
     @Override
     public boolean onMenuItemSelected(int featureId, com.actionbarsherlock.view.MenuItem item) {
         if (item.getItemId()==R.id.menuItemSetupTrip){
-            tripSetupClick(null);
+            tripSetup();
+        }
+        switch (item.getItemId()){
+            case R.id.menuItemSetupTrip:
+                tripSetup();
+                break;
+            case R.id.menuItemClearAGPS:
+                clearAGPS();
+                break;
+            case R.id.menuItemUpdateAGPS:
+                updateAGPS();
+                break;
         }
         return super.onMenuItemSelected(featureId, item);
     }
 
-    public void tripSetupClick(MenuItem item) {
+    private void updateAGPS() {
+        try
+        {
+            LocationManager locationmanager = (LocationManager) getSystemService(LOCATION_SERVICE);
+            Bundle bundle = new Bundle();
+            locationmanager.sendExtraCommand("gps", "force_xtra_injection", bundle);
+            locationmanager.sendExtraCommand("gps", "force_time_injection", bundle);
+            Toast.makeText(this, "AGPS запрос на обновление данных", Toast.LENGTH_LONG).show();
+            return;
+        }
+        catch(Exception exception)
+        {
+            Log.e("clear AGPS",exception);
+        }
+    }
+
+    private void clearAGPS() {
+        try
+        {
+            ((LocationManager)this.getSystemService(LOCATION_SERVICE)).sendExtraCommand("gps", "delete_aiding_data", null);
+            Toast.makeText(this, "AGPS запрос на сброс данных", Toast.LENGTH_LONG).show();
+            return;
+        }
+        catch(Exception exception)
+        {
+            Log.e("clear AGPS",exception);
+        }
+    }
+
+    /**
+     * настройка пробегов
+     */
+    public void tripSetup() {
         TripSetupDialog tripSetupDialog = new TripSetupDialog();
         tripSetupDialog.show(getFragmentManager(), "trip");
     }
+
+
+
 
     private class BackgroudFrameHolder{
         IBackgroudFrame frame;
