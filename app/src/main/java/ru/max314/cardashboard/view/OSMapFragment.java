@@ -27,6 +27,10 @@ import org.osmdroid.views.overlay.compass.IOrientationConsumer;
 import org.osmdroid.views.overlay.compass.IOrientationProvider;
 import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 import ru.max314.cardashboard.R;
 import ru.max314.cardashboard.model.ApplicationModelFactory;
 import ru.max314.cardashboard.model.ModelData;

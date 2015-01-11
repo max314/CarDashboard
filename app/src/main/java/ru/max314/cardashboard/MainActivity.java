@@ -2,25 +2,29 @@ package ru.max314.cardashboard;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 
 import java.util.Locale;
 
 import ru.max314.cardashboard.model.ApplicationModelFactory;
+import ru.max314.cardashboard.view.TripSetupDialog;
 import ru.max314.util.DisplayToast;
+import ru.max314.util.LogHelper;
 import ru.max314.util.SpeechUtils;
 import ru.max314.util.threads.TimerHelper;
 
 
 public class MainActivity extends SherlockActivity {
-
+    protected static LogHelper Log = new LogHelper(FullscreenActivity.class);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -145,4 +149,69 @@ public class MainActivity extends SherlockActivity {
         //SpeechUtils.speech("Привет. Мы, приложение car dashboard запустились. Считаем 1 2 3 4",true);
         SpeechUtils.speech("Местоположение GPS. статус. запущенно",true);
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+        getSupportMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onMenuItemSelected(int featureId, com.actionbarsherlock.view.MenuItem item) {
+        if (item.getItemId()==R.id.menuItemSetupTrip){
+            tripSetup();
+        }
+        switch (item.getItemId()){
+            case R.id.menuItemSetupTrip:
+                tripSetup();
+                break;
+            case R.id.menuItemClearAGPS:
+                clearAGPS();
+                break;
+            case R.id.menuItemUpdateAGPS:
+                updateAGPS();
+                break;
+        }
+        return super.onMenuItemSelected(featureId, item);
+    }
+
+    private void updateAGPS() {
+        try
+        {
+            LocationManager locationmanager = (LocationManager) getSystemService(LOCATION_SERVICE);
+            Bundle bundle = new Bundle();
+            locationmanager.sendExtraCommand("gps", "force_xtra_injection", bundle);
+            locationmanager.sendExtraCommand("gps", "force_time_injection", bundle);
+            Toast.makeText(this, "AGPS запрос на обновление данных", Toast.LENGTH_LONG).show();
+            return;
+        }
+        catch(Exception exception)
+        {
+            Log.e("clear AGPS",exception);
+        }
+    }
+
+    private void clearAGPS() {
+        try
+        {
+            ((LocationManager)this.getSystemService(LOCATION_SERVICE)).sendExtraCommand("gps", "delete_aiding_data", null);
+            Toast.makeText(this, "AGPS запрос на сброс данных", Toast.LENGTH_LONG).show();
+            return;
+        }
+        catch(Exception exception)
+        {
+            Log.e("clear AGPS",exception);
+        }
+    }
+
+    /**
+     * настройка пробегов
+     */
+    public void tripSetup() {
+        TripSetupDialog tripSetupDialog = new TripSetupDialog();
+        tripSetupDialog.show(getFragmentManager(), "trip");
+    }
+
+
 }

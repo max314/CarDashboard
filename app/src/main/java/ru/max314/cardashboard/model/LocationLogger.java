@@ -28,12 +28,13 @@ public class LocationLogger extends EntityLogger<Location> {
         return new IEntityLogFormater<Location>() {
             @Override
             public String getHeader() {
-                return "Date;Lat;Long;Accuracy;Altitude;Speed;Bearing";
+                return "TimeSAT;Time;Date;Lat;Long;Accuracy;Altitude;Speed;Bearing"+"CurrentTime:"+new Date().toString();
             }
 
             @Override
             public String getLine(Location entity) {
                 StringBuilder s = new StringBuilder();
+                s.append(String.format("%d;%d;", entity.getTime(), new Date().getTime()));
 
                 //region date
                 Format format = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
@@ -48,7 +49,6 @@ public class LocationLogger extends EntityLogger<Location> {
                 s.append(entity.getBearing());
                 String buff = s.toString();
                 return buff;
-
             }
         };
     }

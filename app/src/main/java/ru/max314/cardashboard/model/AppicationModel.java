@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 import ru.max314.cardashboard.App;
 import ru.max314.cardashboard.LocationService;
 import ru.max314.util.LogHelper;
+import ru.max314.util.SpeechUtils;
 import ru.max314.util.threads.LoopingThread;
 import ru.max314.util.threads.TimerHelper;
 
@@ -24,6 +25,7 @@ public class AppicationModel {
     LoopingThread loopingThread = new LoopingThread();
     TimerHelper logSaveWatcher = null;
     TimerHelper dateChangerWatcher = null;
+    TimerHelper locationVerifyWatcher = null;
 
     ModelData modelData = new ModelData();
 
@@ -89,6 +91,29 @@ public class AppicationModel {
             }
         });
         logSaveWatcher.start();
+
+        locationVerifyWatcher = new TimerHelper("проверка GPS",
+                TimeUnit.MILLISECONDS.convert(5,TimeUnit.MINUTES), // Начинаем через 3 миуту
+                TimeUnit.MILLISECONDS.convert(5,TimeUnit.MINUTES), // каждые 5 полминуты
+                new Runnable() {
+            @Override
+            public void run() {
+                GPSVerify();
+            }
+        });
+        locationVerifyWatcher.start();
+
+    }
+
+    private void GPSVerify() {
+        try {
+            String res = modelData.getLocationVerifyListiner().Verify();
+            if (res.length()>0){
+                SpeechUtils.speech(res,true);
+            }
+        } catch (Exception e) {
+            Log.e("error",e);
+        }
     }
 
     public void saveAll() {

@@ -66,6 +66,9 @@ public class ModelData {
      */
     TripSumator tripOneSumator = new TripSumator();
 
+    @Expose
+    LocationVerifyListiner locationVerifyListiner = new LocationVerifyListiner();
+
     Date currentDate = null;
 
 
@@ -98,6 +101,7 @@ public class ModelData {
         this.tripOneSumator.addFromLocation(currentLocation);
         this.tripStartSumator.addFromLocation(currentLocation);
         this.tripTodaySumator.addFromLocation(currentLocation);
+        this.locationVerifyListiner.addFromLocation(currentLocation);
     }
 
     /***
@@ -169,6 +173,10 @@ public class ModelData {
         return tripOneSumator;
     }
 
+    public LocationVerifyListiner getLocationVerifyListiner() {
+        return locationVerifyListiner;
+    }
+
     //endregion
 
 
@@ -189,7 +197,7 @@ public class ModelData {
         loc.setLatitude(47.20140598);
         loc.setLongitude(38.92323017);
         loc.setAccuracy(30);
-        loc.setSpeed(10);
+        loc.setSpeed(0);
         return loc;
     }
 
