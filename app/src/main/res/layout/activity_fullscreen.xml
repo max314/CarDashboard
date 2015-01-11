@@ -92,6 +92,11 @@
                     android:scaleType="fitCenter"
                     android:src="@drawable/old_zoom_out" />
             </LinearLayout>
+            <fragment
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:name="ru.max314.cardashboard.view.MusicUNIFragment"
+                tools:layout="@layout/fragment_music_uni" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -102,8 +107,8 @@
 
                 <ImageButton
                     android:id="@+id/btPreference"
-                    android:layout_width="128dp"
-                    android:layout_height="128dp"
+                    android:layout_width="162dp"
+                    android:layout_height="162dp"
                     android:layout_gravity="right|center_vertical"
                     android:onClick="Minus"
                     android:scaleType="fitCenter"

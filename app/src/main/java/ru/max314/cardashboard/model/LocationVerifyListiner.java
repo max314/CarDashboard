@@ -64,6 +64,7 @@ public class LocationVerifyListiner {
             Log.e("проблемы проверки GPS");
             Log.e("last"+lastKnowLocation.toString());
             Log.e("current"+currentLocation.toString());
+            Log.e("now"+new Date().toString());
         }
         return result;
     }

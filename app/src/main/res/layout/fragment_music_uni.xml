@@ -1,0 +1,38 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ru.max314.cardashboard.view.MusicUNIFragment">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <ImageButton
+        android:id="@+id/btPause"
+        android:layout_width="162dp"
+        android:layout_height="162dp"
+        android:layout_gravity="right|center_vertical"
+        android:onClick="pauseClick"
+        android:scaleType="fitCenter"
+        android:src="@drawable/media_play_pause" />
+    <ImageButton
+        android:id="@+id/btNext"
+        android:layout_width="162dp"
+        android:layout_height="162dp"
+        android:layout_gravity="right|center_vertical"
+        android:onClick="nextClick"
+        android:scaleType="fitCenter"
+        android:src="@drawable/media_skip_forward" />
+    <ImageButton
+        android:id="@+id/btStart"
+        android:layout_width="162dp"
+        android:layout_height="162dp"
+        android:layout_gravity="right|center_vertical"
+        android:onClick="startClick"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ipod_mount" />
+
+
+    </LinearLayout>
+
+
+</FrameLayout>
