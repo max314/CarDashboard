@@ -44,7 +44,7 @@ public class MusicUNIFragment extends Fragment {
 
     @OnClick(R.id.btStart)
     public void startClick(View view) {
-        String a_package = "com.maxmpz.audioplaer";
+        String a_package = "com.maxmpz.audioplayer";
         Intent LaunchIntent = this.getActivity().getPackageManager().getLaunchIntentForPackage(a_package);
         startActivity(LaunchIntent);
     }

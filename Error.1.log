@@ -1,0 +1,324 @@
+USER_CRASH_DATE=2015-01-11T19:30:56.000+04:00
+USER_COMMENT=null
+USER_EMAIL=N/A
+ANDROID_VERSION=4.2.2
+PHONE_MODEL=Full AOSP on MStar Cedric3
+BRAND=Mstar
+APP_VERSION_CODE=1
+APP_VERSION_NAME=1.0
+STACK_TRACE=java.lang.NullPointerException
+at ru.max314.util.SpeechUtils$1.onInit(SpeechUtils.java:38)
+at android.speech.tts.TextToSpeech.dispatchOnInit(TextToSpeech.java:640)
+at android.speech.tts.TextToSpeech.access$1000(TextToSpeech.java:52)
+at android.speech.tts.TextToSpeech$Connection.onServiceConnected(TextToSpeech.java:1296)
+at android.app.LoadedApk$ServiceDispatcher.doConnected(LoadedApk.java:1097)
+at android.app.LoadedApk$ServiceDispatcher$RunConnection.run(LoadedApk.java:1114)
+at android.os.Handler.handleCallback(Handler.java:615)
+at android.os.Handler.dispatchMessage(Handler.java:92)
+at android.os.Looper.loop(Looper.java:137)
+at android.app.ActivityThread.main(ActivityThread.java:4745)
+at java.lang.reflect.Method.invokeNative(Native Method)
+at java.lang.reflect.Method.invoke(Method.java:511)
+at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:786)
+at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:553)
+at dalvik.system.NativeStart.main(Native Method)
+
+LOGCAT=Location[mProvider=gps,mTime=1420990171000,mLatitude=47.320795,mLongitude=38.712401666666665,mHasAltitude=true,mAltitude=87.2,mHasSpeed=true,mSpeed=25.979445,mHasBearing=true,mBearing=128.5,mHasAccuracy=true,mAccuracy=1.3,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:29:39.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990172000,mLatitude=47.32064999999999,mLongitude=38.71267,mHasAltitude=true,mAltitude=87.31,mHasSpeed=true,mSpeed=25.825111,mHasBearing=true,mBearing=128.3,mHasAccuracy=true,mAccuracy=1.3,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:29:40.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990173000,mLatitude=47.320506666666674,mLongitude=38.712938333333334,mHasAltitude=true,mAltitude=87.6,mHasSpeed=true,mSpeed=25.722221,mHasBearing=true,mBearing=128.3,mHasAccuracy=true,mAccuracy=1.3,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:29:41.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990174000,mLatitude=47.320364999999995,mLongitude=38.713206666666665,mHasAltitude=true,mAltitude=87.87,mHasSpeed=true,mSpeed=25.825111,mHasBearing=true,mBearing=127.7,mHasAccuracy=true,mAccuracy=1.3,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:29:42.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990175000,mLatitude=47.320221666666676,mLongitude=38.713475,mHasAltitude=true,mAltitude=87.99,mHasSpeed=true,mSpeed=25.670778,mHasBearing=true,mBearing=128.7,mHasAccuracy=true,mAccuracy=1.3,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:29:43.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990176000,mLatitude=47.320078333333335,mLongitude=38.71373833333334,mHasAltitude=true,mAltitude=88.17,mHasSpeed=true,mSpeed=25.619333,mHasBearing=true,mBearing=129.2,mHasAccuracy=true,mAccuracy=1.3,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:29:44.739  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990177000,mLatitude=47.31993333333333,mLongitude=38.714000000000006,mHasAltitude=true,mAltitude=88.43,mHasSpeed=true,mSpeed=25.567888,mHasBearing=true,mBearing=129.0,mHasAccuracy=true,mAccuracy=1.3,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:29:45.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990178000,mLatitude=47.31979,mLongitude=38.714261666666665,mHasAltitude=true,mAltitude=88.58,mHasSpeed=true,mSpeed=25.413555,mHasBearing=true,mBearing=129.2,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:29:46.739  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990179000,mLatitude=47.319646666666664,mLongitude=38.71452333333333,mHasAltitude=true,mAltitude=88.7,mHasSpeed=true,mSpeed=25.310667,mHasBearing=true,mBearing=128.9,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:29:47.759  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990180000,mLatitude=47.319505,mLongitude=38.71478333333334,mHasAltitude=true,mAltitude=88.79,mHasSpeed=true,mSpeed=25.207777,mHasBearing=true,mBearing=128.9,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:29:48.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990181000,mLatitude=47.31936333333333,mLongitude=38.71504166666667,mHasAltitude=true,mAltitude=88.88,mHasSpeed=true,mSpeed=25.002,mHasBearing=true,mBearing=128.6,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:29:49.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990182000,mLatitude=47.319225,mLongitude=38.7153,mHasAltitude=true,mAltitude=89.04,mHasSpeed=true,mSpeed=24.89911,mHasBearing=true,mBearing=128.1,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:29:50.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990183000,mLatitude=47.319086666666664,mLongitude=38.715558333333334,mHasAltitude=true,mAltitude=89.32,mHasSpeed=true,mSpeed=24.796223,mHasBearing=true,mBearing=128.5,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:29:51.739  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990184000,mLatitude=47.318949999999994,mLongitude=38.715815,mHasAltitude=true,mAltitude=89.57,mHasSpeed=true,mSpeed=24.693333,mHasBearing=true,mBearing=128.4,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:29:52.839  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990185000,mLatitude=47.31881166666667,mLongitude=38.716069999999995,mHasAltitude=true,mAltitude=89.68,mHasSpeed=true,mSpeed=24.590445,mHasBearing=true,mBearing=128.8,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:29:53.739  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990186000,mLatitude=47.318675,mLongitude=38.716323333333335,mHasAltitude=true,mAltitude=89.67,mHasSpeed=true,mSpeed=24.590445,mHasBearing=true,mBearing=129.0,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:29:54.739  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990187000,mLatitude=47.31853666666666,mLongitude=38.716575,mHasAltitude=true,mAltitude=89.63,mHasSpeed=true,mSpeed=24.436111,mHasBearing=true,mBearing=128.8,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:29:55.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990188000,mLatitude=47.318398333333334,mLongitude=38.71682833333333,mHasAltitude=true,mAltitude=89.86,mHasSpeed=true,mSpeed=24.487556,mHasBearing=true,mBearing=128.4,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:29:56.329  6342: 6357 D/ru.max314.util.threads.TimerHelper ]
+каждые пол минуты проверяем смену даты: execute
+
+[ 01-11 19:29:56.329  6342: 6357 D/ru.max314.cardashboard.model.AppicationModel ]
+каждые пол минуты проверяем смену даты выполнение
+
+[ 01-11 19:29:56.759  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990189000,mLatitude=47.318261666666665,mLongitude=38.71708,mHasAltitude=true,mAltitude=90.06,mHasSpeed=true,mSpeed=24.333221,mHasBearing=true,mBearing=128.7,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:29:57.829  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990190000,mLatitude=47.318124999999995,mLongitude=38.717331666666674,mHasAltitude=true,mAltitude=90.19,mHasSpeed=true,mSpeed=24.333221,mHasBearing=true,mBearing=128.6,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:29:58.739  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990191000,mLatitude=47.31798833333334,mLongitude=38.71758333333333,mHasAltitude=true,mAltitude=90.46,mHasSpeed=true,mSpeed=24.384666,mHasBearing=true,mBearing=128.6,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:29:59.739  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990192000,mLatitude=47.31785,mLongitude=38.71783666666667,mHasAltitude=true,mAltitude=90.82,mHasSpeed=true,mSpeed=24.539,mHasBearing=true,mBearing=128.4,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:00.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990193000,mLatitude=47.31771333333333,mLongitude=38.718091666666666,mHasAltitude=true,mAltitude=91.05,mHasSpeed=true,mSpeed=24.693333,mHasBearing=true,mBearing=128.3,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:01.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990194000,mLatitude=47.317573333333335,mLongitude=38.71834833333333,mHasAltitude=true,mAltitude=91.28,mHasSpeed=true,mSpeed=24.796223,mHasBearing=true,mBearing=128.4,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:02.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990195000,mLatitude=47.317434999999996,mLongitude=38.718606666666666,mHasAltitude=true,mAltitude=91.46,mHasSpeed=true,mSpeed=25.104889,mHasBearing=true,mBearing=128.1,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:03.739  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990196000,mLatitude=47.317293333333325,mLongitude=38.71886666666667,mHasAltitude=true,mAltitude=91.51,mHasSpeed=true,mSpeed=25.053444,mHasBearing=true,mBearing=128.4,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:04.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990197000,mLatitude=47.31715166666666,mLongitude=38.71912666666666,mHasAltitude=true,mAltitude=91.5,mHasSpeed=true,mSpeed=25.002,mHasBearing=true,mBearing=128.6,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:05.739  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990198000,mLatitude=47.31700833333333,mLongitude=38.719385,mHasAltitude=true,mAltitude=91.58,mHasSpeed=true,mSpeed=25.156334,mHasBearing=true,mBearing=128.3,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:06.739  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990199000,mLatitude=47.31686500000001,mLongitude=38.71964166666667,mHasAltitude=true,mAltitude=91.83,mHasSpeed=true,mSpeed=24.847666,mHasBearing=true,mBearing=128.8,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:07.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990200000,mLatitude=47.31672333333333,mLongitude=38.71989666666666,mHasAltitude=true,mAltitude=91.98,mHasSpeed=true,mSpeed=24.693333,mHasBearing=true,mBearing=128.8,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:08.739  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990201000,mLatitude=47.316583333333334,mLongitude=38.72015,mHasAltitude=true,mAltitude=92.05,mHasSpeed=true,mSpeed=24.796223,mHasBearing=true,mBearing=128.3,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:09.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990202000,mLatitude=47.31644333333334,mLongitude=38.72040666666667,mHasAltitude=true,mAltitude=92.06,mHasSpeed=true,mSpeed=24.64189,mHasBearing=true,mBearing=128.8,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:10.759  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990203000,mLatitude=47.31630166666667,mLongitude=38.72065833333333,mHasAltitude=true,mAltitude=92.24,mHasSpeed=true,mSpeed=24.539,mHasBearing=true,mBearing=129.1,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:11.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990204000,mLatitude=47.31616166666666,mLongitude=38.720906666666664,mHasAltitude=true,mAltitude=92.36,mHasSpeed=true,mSpeed=24.230333,mHasBearing=true,mBearing=129.8,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:12.739  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990205000,mLatitude=47.316019999999995,mLongitude=38.72114833333333,mHasAltitude=true,mAltitude=92.39,mHasSpeed=true,mSpeed=23.818777,mHasBearing=true,mBearing=130.9,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:13.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990206000,mLatitude=47.31587666666666,mLongitude=38.721376666666664,mHasAltitude=true,mAltitude=92.41,mHasSpeed=true,mSpeed=22.995667,mHasBearing=true,mBearing=132.9,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:14.739  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990207000,mLatitude=47.315735,mLongitude=38.72159166666667,mHasAltitude=true,mAltitude=92.35,mHasSpeed=true,mSpeed=22.069666,mHasBearing=true,mBearing=134.7,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:15.739  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990208000,mLatitude=47.31559666666667,mLongitude=38.72179333333334,mHasAltitude=true,mAltitude=92.21,mHasSpeed=true,mSpeed=21.503778,mHasBearing=true,mBearing=135.1,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:16.739  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990209000,mLatitude=47.31545833333333,mLongitude=38.72199333333333,mHasAltitude=true,mAltitude=92.08,mHasSpeed=true,mSpeed=21.503778,mHasBearing=true,mBearing=135.4,mHasAccuracy=true,mAccuracy=1.3,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:17.739  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990210000,mLatitude=47.31532000000001,mLongitude=38.72219166666666,mHasAltitude=true,mAltitude=91.79,mHasSpeed=true,mSpeed=21.452333,mHasBearing=true,mBearing=135.4,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:18.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990211000,mLatitude=47.31517833333334,mLongitude=38.72239166666667,mHasAltitude=true,mAltitude=91.39,mHasSpeed=true,mSpeed=21.812445,mHasBearing=true,mBearing=135.7,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:19.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990212000,mLatitude=47.31503666666667,mLongitude=38.72259333333333,mHasAltitude=true,mAltitude=91.08,mHasSpeed=true,mSpeed=21.915333,mHasBearing=true,mBearing=135.8,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:20.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990213000,mLatitude=47.31489666666666,mLongitude=38.722791666666666,mHasAltitude=true,mAltitude=90.79,mHasSpeed=true,mSpeed=21.86389,mHasBearing=true,mBearing=136.9,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:21.759  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990214000,mLatitude=47.31475333333333,mLongitude=38.722993333333335,mHasAltitude=true,mAltitude=89.97,mHasSpeed=true,mSpeed=22.172556,mHasBearing=true,mBearing=135.7,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:22.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990215000,mLatitude=47.314609999999995,mLongitude=38.7232,mHasAltitude=true,mAltitude=89.36,mHasSpeed=true,mSpeed=22.532667,mHasBearing=true,mBearing=135.7,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:23.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990216000,mLatitude=47.314466666666675,mLongitude=38.723409999999994,mHasAltitude=true,mAltitude=88.53,mHasSpeed=true,mSpeed=22.789888,mHasBearing=true,mBearing=135.6,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:24.769  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990217000,mLatitude=47.314319999999995,mLongitude=38.72362333333333,mHasAltitude=true,mAltitude=87.82,mHasSpeed=true,mSpeed=23.098555,mHasBearing=true,mBearing=135.8,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:25.739  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990218000,mLatitude=47.31417166666667,mLongitude=38.72383833333333,mHasAltitude=true,mAltitude=87.37,mHasSpeed=true,mSpeed=23.355778,mHasBearing=true,mBearing=135.9,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:26.329  6342: 6357 D/ru.max314.util.threads.TimerHelper ]
+каждые пол минуты проверяем смену даты: execute
+
+[ 01-11 19:30:26.329  6342: 6357 D/ru.max314.cardashboard.model.AppicationModel ]
+каждые пол минуты проверяем смену даты выполнение
+
+[ 01-11 19:30:26.739  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990219000,mLatitude=47.31402333333334,mLongitude=38.724055,mHasAltitude=true,mAltitude=87.1,mHasSpeed=true,mSpeed=23.458666,mHasBearing=true,mBearing=135.7,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:27.759  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990220000,mLatitude=47.313871666666664,mLongitude=38.724273333333336,mHasAltitude=true,mAltitude=86.72,mHasSpeed=true,mSpeed=23.715889,mHasBearing=true,mBearing=136.1,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:28.789  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990221000,mLatitude=47.313719999999996,mLongitude=38.72449166666667,mHasAltitude=true,mAltitude=86.51,mHasSpeed=true,mSpeed=23.870222,mHasBearing=true,mBearing=135.5,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:29.739  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990222000,mLatitude=47.31356833333333,mLongitude=38.724713333333334,mHasAltitude=true,mAltitude=86.18,mHasSpeed=true,mSpeed=23.870222,mHasBearing=true,mBearing=136.1,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:30.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990223000,mLatitude=47.31341666666667,mLongitude=38.72493166666666,mHasAltitude=true,mAltitude=86.02,mHasSpeed=true,mSpeed=23.715889,mHasBearing=true,mBearing=135.8,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:31.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990224000,mLatitude=47.31326666666667,mLongitude=38.72515,mHasAltitude=true,mAltitude=85.72,mHasSpeed=true,mSpeed=23.613,mHasBearing=true,mBearing=135.7,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:32.909  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990225000,mLatitude=47.313115,mLongitude=38.725368333333336,mHasAltitude=true,mAltitude=85.05,mHasSpeed=true,mSpeed=23.613,mHasBearing=true,mBearing=136.2,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:33.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990226000,mLatitude=47.31296166666666,mLongitude=38.725585,mHasAltitude=true,mAltitude=84.68,mHasSpeed=true,mSpeed=23.51011,mHasBearing=true,mBearing=136.2,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:34.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990227000,mLatitude=47.312810000000006,mLongitude=38.7258,mHasAltitude=true,mAltitude=84.65,mHasSpeed=true,mSpeed=23.407223,mHasBearing=true,mBearing=136.1,mHasAccuracy=true,mAccuracy=1.3,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:35.859  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990228000,mLatitude=47.31266000000001,mLongitude=38.726015,mHasAltitude=true,mAltitude=84.82,mHasSpeed=true,mSpeed=23.25289,mHasBearing=true,mBearing=136.0,mHasAccuracy=true,mAccuracy=1.3,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:36.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990229000,mLatitude=47.31251166666666,mLongitude=38.72622666666667,mHasAltitude=true,mAltitude=85.12,mHasSpeed=true,mSpeed=22.892778,mHasBearing=true,mBearing=136.1,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:37.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990230000,mLatitude=47.31236333333333,mLongitude=38.726435,mHasAltitude=true,mAltitude=85.21,mHasSpeed=true,mSpeed=22.841333,mHasBearing=true,mBearing=136.5,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:38.739  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990231000,mLatitude=47.31221666666667,mLongitude=38.72664333333333,mHasAltitude=true,mAltitude=85.2,mHasSpeed=true,mSpeed=22.58411,mHasBearing=true,mBearing=136.2,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:39.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990232000,mLatitude=47.31207333333334,mLongitude=38.726848333333336,mHasAltitude=true,mAltitude=85.33,mHasSpeed=true,mSpeed=22.224,mHasBearing=true,mBearing=136.1,mHasAccuracy=true,mAccuracy=1.3,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:40.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990233000,mLatitude=47.31193,mLongitude=38.72705,mHasAltitude=true,mAltitude=85.34,mHasSpeed=true,mSpeed=21.86389,mHasBearing=true,mBearing=136.4,mHasAccuracy=true,mAccuracy=1.3,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:41.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990234000,mLatitude=47.31179166666667,mLongitude=38.727248333333335,mHasAltitude=true,mAltitude=85.58,mHasSpeed=true,mSpeed=21.555222,mHasBearing=true,mBearing=136.3,mHasAccuracy=true,mAccuracy=1.3,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:42.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990235000,mLatitude=47.311655,mLongitude=38.727441666666664,mHasAltitude=true,mAltitude=85.72,mHasSpeed=true,mSpeed=20.886444,mHasBearing=true,mBearing=136.5,mHasAccuracy=true,mAccuracy=1.3,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:43.739  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990236000,mLatitude=47.31152,mLongitude=38.72763166666667,mHasAltitude=true,mAltitude=85.89,mHasSpeed=true,mSpeed=20.732111,mHasBearing=true,mBearing=136.5,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:44.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990237000,mLatitude=47.31138666666667,mLongitude=38.727819999999994,mHasAltitude=true,mAltitude=85.88,mHasSpeed=true,mSpeed=20.629223,mHasBearing=true,mBearing=136.2,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:45.779  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990238000,mLatitude=47.31125166666667,mLongitude=38.728010000000005,mHasAltitude=true,mAltitude=85.69,mHasSpeed=true,mSpeed=20.680666,mHasBearing=true,mBearing=136.3,mHasAccuracy=true,mAccuracy=1.3,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:46.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990239000,mLatitude=47.311118333333326,mLongitude=38.72819833333333,mHasAltitude=true,mAltitude=85.57,mHasSpeed=true,mSpeed=20.732111,mHasBearing=true,mBearing=136.5,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:47.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990240000,mLatitude=47.310984999999995,mLongitude=38.728388333333335,mHasAltitude=true,mAltitude=85.43,mHasSpeed=true,mSpeed=20.629223,mHasBearing=true,mBearing=136.1,mHasAccuracy=true,mAccuracy=1.3,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:48.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990241000,mLatitude=47.310851666666665,mLongitude=38.72857833333333,mHasAltitude=true,mAltitude=85.03,mHasSpeed=true,mSpeed=20.783556,mHasBearing=true,mBearing=135.7,mHasAccuracy=true,mAccuracy=1.6,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:49.739  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990242000,mLatitude=47.310718333333334,mLongitude=38.72877166666667,mHasAltitude=true,mAltitude=84.49,mHasSpeed=true,mSpeed=20.886444,mHasBearing=true,mBearing=135.3,mHasAccuracy=true,mAccuracy=1.3,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:50.739  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990243000,mLatitude=47.310583333333334,mLongitude=38.728968333333334,mHasAltitude=true,mAltitude=84.12,mHasSpeed=true,mSpeed=21.298,mHasBearing=true,mBearing=135.4,mHasAccuracy=true,mAccuracy=1.3,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:51.759  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990244000,mLatitude=47.310446666666664,mLongitude=38.729166666666664,mHasAltitude=true,mAltitude=83.75,mHasSpeed=true,mSpeed=21.606667,mHasBearing=true,mBearing=135.9,mHasAccuracy=true,mAccuracy=1.2,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:52.739  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990245000,mLatitude=47.310308333333325,mLongitude=38.729365,mHasAltitude=true,mAltitude=83.17,mHasSpeed=true,mSpeed=21.761,mHasBearing=true,mBearing=135.9,mHasAccuracy=true,mAccuracy=1.3,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:53.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990246000,mLatitude=47.31016666666666,mLongitude=38.72956666666666,mHasAltitude=true,mAltitude=82.58,mHasSpeed=true,mSpeed=21.812445,mHasBearing=true,mBearing=135.8,mHasAccuracy=true,mAccuracy=1.4,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:54.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990247000,mLatitude=47.310026666666666,mLongitude=38.72976666666667,mHasAltitude=true,mAltitude=82.09,mHasSpeed=true,mSpeed=21.658112,mHasBearing=true,mBearing=135.9,mHasAccuracy=true,mAccuracy=1.3,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:55.749  6342: 6371 D/ru.max314.cardashboard.LocationService ]
+Location[mProvider=gps,mTime=1420990248000,mLatitude=47.30988833333334,mLongitude=38.72996666666666,mHasAltitude=true,mAltitude=81.96,mHasSpeed=true,mSpeed=21.555222,mHasBearing=true,mBearing=135.9,mHasAccuracy=true,mAccuracy=1.3,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:56.279  6342: 6359 D/ru.max314.util.threads.TimerHelper ]
+проверка GPS: execute
+
+[ 01-11 19:30:56.279  6342: 6359 E/ru.max314.cardashboard.model.LocationVerifyListiner ]
+проблемы проверки GPS
+
+[ 01-11 19:30:56.279  6342: 6359 E/ru.max314.cardashboard.model.LocationVerifyListiner ]
+lastLocation[mProvider=gps,mTime=1420990248000,mLatitude=47.30988833333334,mLongitude=38.72996666666666,mHasAltitude=true,mAltitude=81.96,mHasSpeed=true,mSpeed=21.555222,mHasBearing=true,mBearing=135.9,mHasAccuracy=true,mAccuracy=1.3,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:56.279  6342: 6359 E/ru.max314.cardashboard.model.LocationVerifyListiner ]
+currentLocation[mProvider=gps,mTime=1420990248000,mLatitude=47.30988833333334,mLongitude=38.72996666666666,mHasAltitude=true,mAltitude=81.96,mHasSpeed=true,mSpeed=21.555222,mHasBearing=true,mBearing=135.9,mHasAccuracy=true,mAccuracy=1.3,mExtras=Bundle[mParcelledData.dataSize=44]]
+
+[ 01-11 19:30:56.279  6342: 6359 E/ru.max314.cardashboard.model.LocationVerifyListiner ]
+nowSun Jan 11 19:30:56 GMT+04:00 2015
+
+[ 01-11 19:30:56.279  6342: 6359 D/ru.max314.util.SpeechUtils ]
+Говорилко хочет говорить:Проблемы GPS. местоположение не меняеться при наличии скорости
+
+[ 01-11 19:30:56.289  6342: 6342 I/TextToSpeech ]
+Connected to ComponentInfo{com.google.android.tts/com.google.android.tts.service.GoogleTTSService}
+
+[ 01-11 19:30:56.289  6342: 6342 D/ru.max314.util.SpeechUtils ]
+Говорилко инициализации движка и протзношение:Проблемы GPS. местоположение не меняеться при наличии скорости
+
+[ 01-11 19:30:56.289  6342: 6342 D/AndroidRuntime ]
+Shutting down VM
+
+[ 01-11 19:30:56.289  6342: 6342 W/dalvikvm ]
+threadid=1: thread exiting with uncaught exception (group=0x41947300)
+
+[ 01-11 19:30:56.289  6342: 6342 E/ACRA     ]
+ACRA caught a NullPointerException exception for ru.max314.cardashboard. Building report.
+
+[ 01-11 19:30:56.289  6342: 6359 I/TextToSpeech ]
+Sucessfully bound to com.google.android.tts
+
+[ 01-11 19:30:56.289  6342: 6342 D/ACRA     ]
+Using custom Report Fields
+
+[ 01-11 19:30:56.299  6342: 6358 D/ru.max314.util.threads.TimerHelper ]
+Раз в три минуты сбрасываем лог местоположения: execute
+
+[ 01-11 19:30:56.309  6342: 6342 I/ACRA     ]
+READ_LOGS granted! ACRA can include LogCat and DropBox data.
+
+[ 01-11 19:30:56.339  6342: 6357 D/ru.max314.util.threads.TimerHelper ]
+каждые пол минуты проверяем смену даты: execute
+
+[ 01-11 19:30:56.349  6342: 6357 D/ru.max314.cardashboard.model.AppicationModel ]
+каждые пол минуты проверяем смену даты выполнение
+
+[ 01-11 19:30:56.379  6342: 6342 D/ACRA     ]
+Retrieving logcat output...
+

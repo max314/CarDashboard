@@ -22,7 +22,7 @@ public class SpeechUtils {
      * Сказать чтонибудь
      * @param text
      */
-    public static void speech(final String text, final boolean speechPredString){
+    public synchronized static void speech(final String text, final boolean speechPredString){
         Log.d("Говорилко хочет говорить:"+text);
         synchronized (locker){
             if (textToSpeech!=null){
@@ -32,7 +32,7 @@ public class SpeechUtils {
             }
             textToSpeech = new TextToSpeech(App.getInstance(), new TextToSpeech.OnInitListener() {
                 @Override
-                public void onInit(int status) {
+                public synchronized void onInit(int status) {
                     if (status == TextToSpeech.SUCCESS){
                         Log.d("Говорилко инициализации движка и протзношение:"+text);
                         textToSpeech.setLanguage(new Locale("ru","RU"));
@@ -48,7 +48,7 @@ public class SpeechUtils {
 
         }
     }
-    private static void speechInternal(final String text, boolean speechPredString){
+    private synchronized static void speechInternal(final String text, boolean speechPredString){
         Log.d("Говорилко speechInternal: вход -> "+text);
         if (textToSpeech!=null){
             if (speechPredString)
@@ -73,16 +73,16 @@ public class SpeechUtils {
                 freeHolder.stop();
                 freeHolder=null;
             }
-            freeHolder = new TimerHelper("10 минут на освобождение говорилки",
-                    TimeUnit.MILLISECONDS.convert(1,TimeUnit.MINUTES), // Начинаем через 10 минуту
-                    TimeUnit.MILLISECONDS.convert(1,TimeUnit.SECONDS), // каждые полминуты
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            freeSpeechEngine();
-                        }
-                    });
-            freeHolder.start();
+//            freeHolder = new TimerHelper("10 минут на освобождение говорилки",
+//                    TimeUnit.MILLISECONDS.convert(10,TimeUnit.MINUTES), // Начинаем через 10 минуту
+//                    TimeUnit.MILLISECONDS.convert(30,TimeUnit.MINUTES), // каждые полминуты
+//                    new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            freeSpeechEngine();
+//                        }
+//                    });
+//            freeHolder.start();
         }
         else {
             Log.e("Говорилко speechInternal: чейта намудрили");
@@ -93,7 +93,7 @@ public class SpeechUtils {
     /**
      * освободить говорилку
      */
-    private static void freeSpeechEngine() {
+    private synchronized static void freeSpeechEngine() {
         Log.d("Говорилко освобождение движка: Вход.");
         synchronized (locker) {
             if (textToSpeech!=null){
