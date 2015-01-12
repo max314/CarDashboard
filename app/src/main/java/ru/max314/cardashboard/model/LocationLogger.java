@@ -42,11 +42,11 @@ public class LocationLogger extends EntityLogger<Location> {
                 String formatted = format.format(date);
                 s.append(formatted+";");
                 //endregion
-                s.append(String.format("%f;%f;", entity.getLatitude(), entity.getLongitude()));
-                s.append(String.format("%.0f;", entity.getAccuracy()));
-                s.append(entity.getAltitude()+";");
-                s.append(entity.getSpeed() + ";");
-                s.append(entity.getBearing());
+                s.append(String.format("%20.17f;%20.17f;", entity.getLatitude(), entity.getLongitude()));
+                s.append(String.format("%10.5f;", entity.getAccuracy()));
+                s.append(String.format("%10.5f;", entity.getAltitude()));
+                s.append(String.format("%10.5f;", entity.getSpeed()));
+                s.append(String.format("%10.5f;",entity.getBearing()));
                 String buff = s.toString();
                 return buff;
             }
