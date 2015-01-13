@@ -93,8 +93,8 @@ public class AppicationModel {
         logSaveWatcher.start();
 
         locationVerifyWatcher = new TimerHelper("проверка GPS",
-                TimeUnit.MILLISECONDS.convert(5,TimeUnit.MINUTES), // Начинаем через 3 миуту
-                TimeUnit.MILLISECONDS.convert(5,TimeUnit.MINUTES), // каждые 5 полминуты
+                TimeUnit.MILLISECONDS.convert(1,TimeUnit.MINUTES), // Начинаем через 3 миуту
+                TimeUnit.MILLISECONDS.convert(1,TimeUnit.MINUTES), // каждые 5 полминуты
                 new Runnable() {
             @Override
             public void run() {

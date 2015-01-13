@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import ru.max314.util.LogHelper;
@@ -23,6 +25,12 @@ public abstract class EntityLogger<T> {
     private List<T> entityList = new ArrayList<T>();
     private final Object lock = new Object();
 
+    public EntityLogger() {
+    }
+
+    public EntityLogger(Collection<T> entityList) {
+        this.entityList = new ArrayList<T>(entityList);
+    }
 
     /**
      * Добавить что что мы собрались логировать

@@ -18,7 +18,8 @@ import ru.max314.util.LogHelper;
  */
 public class LocationVerifyListiner {
     static LogHelper Log = new LogHelper(LocationVerifyListiner.class);
-    private static final int MAX_DEEP = 200;
+    private static final int MAX_DEEP = 1200;
+    private static final int MAX_DUP_COUNT = 100;
     private String locationDescription = "";
     private int locationDublicates = 0;
 
@@ -27,66 +28,58 @@ public class LocationVerifyListiner {
     private Date lastAdd = null;
 
 
-    public synchronized void addFromLocation(Location location){
+    public synchronized void addFromLocation(Location location) {
 
         lastAdd = new Date();
         locationList.add(location);
-        while (locationList.size()>MAX_DEEP){ // если перебрали глубину подчищаем первые элементы
+        while (locationList.size() > MAX_DEEP) { // если перебрали глубину подчищаем первые элементы
             locationList.remove(0);
         }
 
         // сравниваем паттерны
         String buff = createLocationDescription(location);
-        if (buff.equals(locationDescription)){
+        if (buff.equals(locationDescription)) {
             locationDublicates++;
-        }else {
-            locationDublicates=0;
+        } else {
+            locationDublicates = 0;
             locationDescription = buff;
+        }
+        if (getLocationDublicates()>0 && (getLocationDublicates() % MAX_DUP_COUNT==0)){
+            LocationLogger loger = new LocationLogger(locationList){
+                @Override
+                protected String getFileName() {
+                    return String.format("%s.%d.verify", super.getFileName(),getLocationDublicates());
+                }
+            };
+            loger.performLog();
         }
     }
 
-    private String createLocationDescription(Location location){
-        String str = String.format("%20.17f;%20.17f;%10.5f",location.getLatitude(),location.getLongitude(),location.getSpeed() );
+    private String createLocationDescription(Location location) {
+        String str = String.format("%20.17f;%20.17f;%10.5f;%10.5f", location.getLatitude(), location.getLongitude(), location.getSpeed(), location.getAltitude());
         return str;
     }
 
     /**
      * Если GPS залип количество повторяющихся местоположений
+     *
      * @return
      */
     public int getLocationDublicates() {
         return locationDublicates;
     }
 
-    public synchronized String Verify(){
+    public synchronized String Verify() {
         String result = "";
         // были данные ?
         Date now = new Date();
-        if (Math.abs(now.getTime() - lastAdd.getTime())> TimeUnit.MILLISECONDS.convert(5,TimeUnit.MINUTES) ){
-            result = "Данных от GPS не поступало 5 минут";
-        }else{
+        if (Math.abs(now.getTime() - lastAdd.getTime()) > TimeUnit.MILLISECONDS.convert(5, TimeUnit.MINUTES)) {
+            result = "Проблемы GPS. Данных не поступало 5 минут";
+        } else {
+            if (getLocationDublicates() > MAX_DUP_COUNT) { // 3 секунды
+                result = String.format("Проблемы GPS. местоположение не меняется в течении %d циклов.", getLocationDublicates());
 
-            Date nowDateLastKnow = new Date(lastKnowLocation.getTime());
-            long nowLastKnow = nowDateLastKnow.getMinutes()*60+nowDateLastKnow.getSeconds();
-            Date nowDate = new Date();
-            long now = nowDate.getMinutes()*60+nowDate.getSeconds();
-
-
-            if (Math.abs(nowLastKnow - now)>20 ){ // 3 секунды
-                result = "Проблемы GPS. местоположение не обновлялось в течении 20 секунд.";
             }
-            if (!LocationUtils.isSpeedZerro(currentLocation)){
-                if (!(currentLocation.getLatitude() == lastKnowLocation.getLatitude() && currentLocation.getLongitude()==lastKnowLocation.getLongitude())){
-                    lastKnowLocation=currentLocation;
-                }
-                result = "Проблемы GPS. местоположение не меняеться при наличии скорости";
-            }
-        }
-        if (result.length()!=0){
-            Log.e("проблемы проверки GPS");
-            Log.e("last"+lastKnowLocation.toString());
-            Log.e("current"+currentLocation.toString());
-            Log.e("now"+new Date().toString());
         }
         return result;
     }
