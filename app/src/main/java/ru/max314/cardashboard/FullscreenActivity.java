@@ -322,9 +322,6 @@ public class FullscreenActivity extends SherlockActivity {
 
     @Override
     public boolean onMenuItemSelected(int featureId, com.actionbarsherlock.view.MenuItem item) {
-        if (item.getItemId()==R.id.menuItemSetupTrip){
-            tripSetup();
-        }
         switch (item.getItemId()){
             case R.id.menuItemSetupTrip:
                 tripSetup();
