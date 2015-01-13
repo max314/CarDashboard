@@ -58,7 +58,8 @@ public class MusicUNIFragment extends Fragment {
         startActivity(
                 new Intent()
                         .setComponent(new ComponentName(PowerampAPI.PACKAGE_NAME, PowerampAPI.ACTIVITY_PLAYER_UI))
-                        .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        );
 //        startActivity(new Intent(PowerampAPI.ACTION_PLASHOW_CURRENT));
 //        String a_package = "com.maxmpz.audioplayer";
 //        Intent LaunchIntent = this.getActivity().getPackageManager().getLaunchIntentForPackage(a_package);
