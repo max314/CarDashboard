@@ -1,0 +1,13 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context="ru.max314.cardashboard.view.WeatherFragment">
+    <WebView
+        android:id="@+id/webViewWaether"
+        android:layout_width="200px"
+        android:layout_height="200px"
+        android:background="@android:color/transparent"
+        android:layerType="software"
+        />
+</FrameLayout>

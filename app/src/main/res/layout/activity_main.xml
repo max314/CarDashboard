@@ -5,8 +5,14 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context=".MainActivity">
+    <LinearLayout android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+
 
     <Button
         android:layout_width="wrap_content"
@@ -46,6 +52,30 @@
         android:layout_height="wrap_content"
         android:text="Speech test"
         android:onClick="TestSpeech" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10px"
+        >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="download"
+            android:onClick="testPcture" />
+        <WebView
+            android:id="@+id/ivTemp"
+            android:layout_width="200px"
+            android:layout_height="200px"
+            android:background="@android:color/transparent"
+            android:layerType="software"
+
+            />
+
+    </LinearLayout>
 
 
 </LinearLayout>

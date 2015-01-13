@@ -22,7 +22,6 @@ android {
 dependencies {
 
     compile project(':yamapkit')
-
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
 

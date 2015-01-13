@@ -13,6 +13,8 @@
 далекое
 - приебашить ODB (решить как тортуга или нативно)
 
+погодка
+http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139
 
 13.01.2015
 - Управление музыкой poweramp

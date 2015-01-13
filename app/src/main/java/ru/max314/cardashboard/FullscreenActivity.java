@@ -101,6 +101,7 @@ public class FullscreenActivity extends SherlockActivity {
 
         final View speedView = findViewById(R.id.speedFragment);
         final View clockView = findViewById(R.id.clockFragment);
+        final View weatheterView = findViewById(R.id.weatherFragment);
 
         Intent intent = this.getIntent();
         createContentByType(intent);
@@ -145,6 +146,8 @@ public class FullscreenActivity extends SherlockActivity {
                 }
                 speedView.setVisibility(visible ? View.GONE : View.VISIBLE);
                 clockView.setVisibility(visible ? View.GONE : View.VISIBLE);
+                weatheterView.setVisibility(visible ? View.GONE : View.VISIBLE);
+
                 if (visible && AUTO_HIDE) {
                     Log.d("if (visible && AUTO_HIDE) {");
                     // Schedule a hide().

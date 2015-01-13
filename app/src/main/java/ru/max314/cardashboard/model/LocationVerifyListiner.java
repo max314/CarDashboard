@@ -73,14 +73,21 @@ public class LocationVerifyListiner {
         String result = "";
         // были данные ?
         Date now = new Date();
-        if (Math.abs(now.getTime() - lastAdd.getTime()) > TimeUnit.MILLISECONDS.convert(5, TimeUnit.MINUTES)) {
-            result = "Проблемы GPS. Данных не поступало 5 минут";
-        } else {
-            if (getLocationDublicates() > MAX_DUP_COUNT) { // 3 секунды
-                result = String.format("Проблемы GPS. местоположение не меняется в течении %d циклов.", getLocationDublicates());
-
-            }
+        if (lastAdd==null){
+            result = "Проблемы GPS. Данных не поступало вообще";
         }
+        else{
+            if (Math.abs(now.getTime() - lastAdd.getTime()) > TimeUnit.MILLISECONDS.convert(5, TimeUnit.MINUTES)) {
+                result = "Проблемы GPS. Данных не поступало 5 минут";
+            } else {
+                if (getLocationDublicates() > MAX_DUP_COUNT) { // 3 секунды
+                    result = String.format("Проблемы GPS. местоположение не меняется в течении %d циклов.", getLocationDublicates());
+
+                }
+            }
+
+        }
+
         return result;
     }
 }

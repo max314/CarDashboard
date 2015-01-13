@@ -54,6 +54,16 @@
         android:layout_marginTop="-14dp"
         tools:layout="@layout/fragment_clock" />
 
+    <fragment
+        android:id="@+id/weatherFragment"
+        android:name="ru.max314.cardashboard.view.WeatherFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|bottom"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="5dp"
+        tools:layout="@layout/fragment_weather" />
+
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
     <FrameLayout
