@@ -1,15 +1,12 @@
 package ru.max314.cardashboard.model;
 
 import android.content.Context;
-import android.util.Log;
-import android.util.TimeUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import ru.max314.cardashboard.App;
-import ru.max314.cardashboard.LocationService;
 import ru.max314.util.LogHelper;
 import ru.max314.util.SpeechUtils;
 import ru.max314.util.threads.LoopingThread;
@@ -43,6 +40,12 @@ public class AppicationModel {
         }
     }
 
+    public void dumpLocationService() {
+        if (locationService != null) {
+            locationService.dump();
+        }
+    }
+
     public boolean isLocationServiceStarted() {
         return locationService == null;
     }
@@ -70,37 +73,37 @@ public class AppicationModel {
 
     private void configBackgoundTask() {
         dateChangerWatcher = new TimerHelper("каждые пол минуты проверяем смену даты",
-                TimeUnit.MILLISECONDS.convert(1,TimeUnit.MINUTES), // Начинаем через миуту
-                TimeUnit.MILLISECONDS.convert(30,TimeUnit.SECONDS), // каждые полминуты
+                TimeUnit.MILLISECONDS.convert(1, TimeUnit.MINUTES), // Начинаем через миуту
+                TimeUnit.MILLISECONDS.convert(30, TimeUnit.SECONDS), // каждые полминуты
                 new Runnable() {
-            @Override
-            public void run() {
-                dateChanger();
-            }
-        });
+                    @Override
+                    public void run() {
+                        dateChanger();
+                    }
+                });
         dateChangerWatcher.start();
 
 
         logSaveWatcher = new TimerHelper("Раз в три минуты сбрасываем лог местоположения",
-                TimeUnit.MILLISECONDS.convert(3,TimeUnit.MINUTES), // Начинаем через миуту
-                TimeUnit.MILLISECONDS.convert(3,TimeUnit.MINUTES), // каждые полминуты
+                TimeUnit.MILLISECONDS.convert(3, TimeUnit.MINUTES), // Начинаем через миуту
+                TimeUnit.MILLISECONDS.convert(3, TimeUnit.MINUTES), // каждые полминуты
                 new Runnable() {
-            @Override
-            public void run() {
-                saveAll();
-            }
-        });
+                    @Override
+                    public void run() {
+                        saveAll();
+                    }
+                });
         logSaveWatcher.start();
 
         locationVerifyWatcher = new TimerHelper("проверка GPS",
-                TimeUnit.MILLISECONDS.convert(1,TimeUnit.MINUTES), // Начинаем через 3 миуту
-                TimeUnit.MILLISECONDS.convert(1,TimeUnit.MINUTES), // каждые 5 полминуты
+                TimeUnit.MILLISECONDS.convert(1, TimeUnit.MINUTES), // Начинаем через 3 миуту
+                TimeUnit.MILLISECONDS.convert(1, TimeUnit.MINUTES), // каждые 5 полминуты
                 new Runnable() {
-            @Override
-            public void run() {
-                GPSVerify();
-            }
-        });
+                    @Override
+                    public void run() {
+                        GPSVerify();
+                    }
+                });
         locationVerifyWatcher.start();
 
     }
@@ -108,11 +111,11 @@ public class AppicationModel {
     private void GPSVerify() {
         try {
             String res = modelData.getLocationVerifyListiner().Verify();
-            if (res.length()>0){
-                SpeechUtils.speech(res,true);
+            if (res.length() > 0) {
+                SpeechUtils.speech(res, true);
             }
         } catch (Exception e) {
-            Log.e("error",e);
+            Log.e("error", e);
         }
     }
 

@@ -1,0 +1,10 @@
+NMEA
+Определение доступности GPS в Android
+http://habrahabr.ru/post/123397/
+
+Передача GPS данных(NMEA) с Android на Windows
+http://geektimes.ru/post/121190/
+
+
+сборник программ GPS
+http://itc.ua/articles/praktikum-ispolzuem-gps-na-android-po-maksimumu/

@@ -19,7 +19,7 @@ import ru.max314.util.LogHelper;
 public class LocationVerifyListiner {
     static LogHelper Log = new LogHelper(LocationVerifyListiner.class);
     private static final int MAX_DEEP = 1200;
-    private static final int MAX_DUP_COUNT = 100;
+    private static final int MAX_DUP_COUNT = 60*5;
     private String locationDescription = "";
     private int locationDublicates = 0;
 
@@ -48,7 +48,7 @@ public class LocationVerifyListiner {
             LocationLogger loger = new LocationLogger(locationList){
                 @Override
                 protected String getFileName() {
-                    return String.format("%s.%d.verify", super.getFileName(),getLocationDublicates());
+                    return String.format("%s.%d.ver.log", super.getFileName(),getLocationDublicates());
                 }
             };
             loger.performLog();
@@ -56,7 +56,8 @@ public class LocationVerifyListiner {
     }
 
     private String createLocationDescription(Location location) {
-        String str = String.format("%20.17f;%20.17f;%10.5f;%10.5f", location.getLatitude(), location.getLongitude(), location.getSpeed(), location.getAltitude());
+        String str = String.format("%20.17f;%20.17f;%10.5f;%10.5f;%10.5f;%10.5f",
+                location.getLatitude(), location.getLongitude(), location.getSpeed(), location.getAltitude(),location.getAccuracy(),location.getBearing());
         return str;
     }
 

@@ -1,25 +1,17 @@
 package ru.max314.cardashboard;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Picture;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 
 import java.util.Locale;
 
+import ru.max314.cardashboard.model.ApplicationModelFactory;
 import ru.max314.cardashboard.view.TripSetupDialog;
 import ru.max314.util.DisplayToast;
 import ru.max314.util.LogHelper;
@@ -215,32 +207,7 @@ public class MainActivity extends SherlockActivity {
 
 
     public void testPcture(View view) {
-        WebView wv = (WebView) findViewById(R.id.ivTemp);
-//        wv.setWebViewClient(new WebViewClient() {
-//
-//            @Override
-//            public void onPageFinished(WebView view, String url) {
-//                Picture picture = view.capturePicture();
-//                Bitmap b = Bitmap.createBitmap(
-//                        picture.getWidth(), picture.getHeight(), Bitmap.Config.ARGB_8888);
-//                Canvas c = new Canvas(b);
-//                picture.draw(c);
-//
-//                FileOutputStream fos = null;
-//                try {
-//                    fos = new FileOutputStream( "/sdcard/"  + "page.jpg" );
-//                    if ( fos != null ) {
-//                        b.compress(Bitmap.CompressFormat.JPEG, 90, fos );
-//                        fos.close();
-//                    }
-//                }
-//                catch( Exception e ) {
-//                    System.out.println("-----error--"+e);
-//                }
-//            }
-//        });
+        ApplicationModelFactory.getModel().dumpLocationService();
 
-        wv.loadUrl("http://api.openweathermap.org/data/2.5/weather?lat=47.318124999999995&lon=38.717331666666674&mode=html&lang=ru");
-        wv.setBackgroundColor(Color.TRANSPARENT);
     }
 }

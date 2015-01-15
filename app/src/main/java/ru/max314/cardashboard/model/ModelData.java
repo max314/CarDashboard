@@ -67,7 +67,7 @@ public class ModelData {
     TripSumator tripOneSumator = new TripSumator();
 
     @Expose
-    LocationVerifyListiner locationVerifyListiner = new LocationVerifyListiner();
+    private transient LocationVerifyListiner locationVerifyListiner = new LocationVerifyListiner();
 
     Date currentDate = null;
 
