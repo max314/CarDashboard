@@ -9,10 +9,13 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 
+import org.osmdroid.contributor.util.Util;
+
 import java.util.Locale;
 
 import ru.max314.cardashboard.model.ApplicationModelFactory;
 import ru.max314.cardashboard.view.TripSetupDialog;
+import ru.max314.util.AppUtils;
 import ru.max314.util.DisplayToast;
 import ru.max314.util.LogHelper;
 import ru.max314.util.SpeechUtils;
@@ -164,6 +167,9 @@ public class MainActivity extends SherlockActivity {
             case R.id.menuItemUpdateAGPS:
                 updateAGPS();
                 break;
+            case R.id.menuItemClearLogFiles:
+                AppUtils.clearLogFiles();
+                break;
         }
         return super.onMenuItemSelected(featureId, item);
     }
@@ -209,5 +215,10 @@ public class MainActivity extends SherlockActivity {
     public void testPcture(View view) {
         ApplicationModelFactory.getModel().dumpLocationService();
 
+    }
+
+    public void startBTActivity(View view) {
+        Intent intent = new Intent(this,OdbActivityTest.class);
+        startActivity(intent);
     }
 }

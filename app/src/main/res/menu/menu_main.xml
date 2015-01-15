@@ -17,4 +17,9 @@
         android:title="Обновление данных AGPS"
         android:orderInCategory="120"
         />
+    <item
+        android:id="@+id/menuItemClearLogFiles"
+        android:title="Очистить лог файлы (*.log)"
+        android:orderInCategory="130"
+        />
 </menu>

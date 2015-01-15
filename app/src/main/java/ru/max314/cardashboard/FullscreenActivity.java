@@ -13,6 +13,7 @@ import ru.max314.cardashboard.view.OSMapFragment;
 import ru.max314.cardashboard.view.SpeedFragment;
 import ru.max314.cardashboard.view.TripSetupDialog;
 import ru.max314.cardashboard.view.YaMapFragment;
+import ru.max314.util.AppUtils;
 import ru.max314.util.LogHelper;
 import ru.max314.util.threads.TimerUIHelper;
 
@@ -334,6 +335,9 @@ public class FullscreenActivity extends SherlockActivity {
                 break;
             case R.id.menuItemUpdateAGPS:
                 updateAGPS();
+                break;
+            case R.id.menuItemClearLogFiles:
+                AppUtils.clearLogFiles();
                 break;
         }
         return super.onMenuItemSelected(featureId, item);

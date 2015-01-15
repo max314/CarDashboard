@@ -69,17 +69,9 @@ public class ModelData {
     @Expose
     private transient LocationVerifyListiner locationVerifyListiner = new LocationVerifyListiner();
 
+    private String BTAddress ="";
+
     Date currentDate = null;
-
-
-
-    public float getCurrentYaZoom() {
-        return currentYaZoom;
-    }
-
-    public void setCurrentYaZoom(float currentYaZoom) {
-        this.currentYaZoom = currentYaZoom;
-    }
 
     /***
      * Текущее местоположение
@@ -201,4 +193,11 @@ public class ModelData {
         return loc;
     }
 
+    public String getBTAddress() {
+        return BTAddress;
+    }
+
+    public void setBTAddress(String BTAddress) {
+        this.BTAddress = BTAddress;
+    }
 }

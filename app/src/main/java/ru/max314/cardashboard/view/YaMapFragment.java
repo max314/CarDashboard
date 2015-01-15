@@ -178,7 +178,6 @@ public class YaMapFragment extends Fragment implements IBackgroudMapFrame {
 
     @Override
     public void onPause() {
-        modelData.setCurrentYaZoom(mapController.getZoomCurrent());
 
         SharedPreferences pref = getActivity().getPreferences(getActivity().MODE_PRIVATE);
         SharedPreferences.Editor ed = pref.edit();
