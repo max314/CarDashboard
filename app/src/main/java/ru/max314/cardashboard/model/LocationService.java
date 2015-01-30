@@ -19,7 +19,8 @@ public class LocationService extends Thread {
 
     public LocationService(LocationManager locationManager ,ModelData modelData) {
         super("LocationThread");
-        locationListenerProcessing = new LocationListenerParanoicProcessing(locationManager, modelData);
+        //locationListenerProcessing = new LocationListenerParanoicProcessing(locationManager, modelData);
+        locationListenerProcessing = new LocationListenerProcessing(locationManager, modelData);
     }
 
 

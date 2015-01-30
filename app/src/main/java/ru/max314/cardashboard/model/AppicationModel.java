@@ -22,7 +22,7 @@ public class AppicationModel {
     LoopingThread loopingThread = new LoopingThread();
     TimerHelper logSaveWatcher = null;
     TimerHelper dateChangerWatcher = null;
-    TimerHelper locationVerifyWatcher = null;
+//    TimerHelper locationVerifyWatcher = null;
 
     ModelData modelData = new ModelData();
 
@@ -95,28 +95,28 @@ public class AppicationModel {
                 });
         logSaveWatcher.start();
 
-        locationVerifyWatcher = new TimerHelper("проверка GPS",
-                TimeUnit.MILLISECONDS.convert(1, TimeUnit.MINUTES), // Начинаем через 3 миуту
-                TimeUnit.MILLISECONDS.convert(1, TimeUnit.MINUTES), // каждые 5 полминуты
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        GPSVerify();
-                    }
-                });
-        locationVerifyWatcher.start();
+//        locationVerifyWatcher = new TimerHelper("проверка GPS",
+//                TimeUnit.MILLISECONDS.convert(1, TimeUnit.MINUTES), // Начинаем через 3 миуту
+//                TimeUnit.MILLISECONDS.convert(1, TimeUnit.MINUTES), // каждые 5 полминуты
+//                new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        GPSVerify();
+//                    }
+//                });
+//        locationVerifyWatcher.start();
 
     }
 
     private void GPSVerify() {
-        try {
-            String res = modelData.getLocationVerifyListiner().Verify();
-            if (res.length() > 0) {
-                SpeechUtils.speech(res, true);
-            }
-        } catch (Exception e) {
-            Log.e("error", e);
-        }
+//        try {
+//            String res = modelData.getLocationVerifyListiner().Verify();
+//            if (res.length() > 0) {
+//                SpeechUtils.speech(res, true);
+//            }
+//        } catch (Exception e) {
+//            Log.e("error", e);
+//        }
     }
 
     public void saveAll() {

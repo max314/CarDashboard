@@ -23,6 +23,8 @@ public class SpeechUtils {
      * @param text
      */
     public synchronized static void speech(final String text, final boolean speechPredString){
+        if (true)
+            return;
         Log.d("Говорилко хочет говорить:"+text);
         synchronized (locker){
             if (textToSpeech!=null){

@@ -47,13 +47,16 @@ public class LocationListenerProcessing implements LocationListener, GpsStatus.L
         switch (event) {
             case GpsStatus.GPS_EVENT_STARTED:
                 SpeechUtils.speech("GPS статус. запущенно", false);
+                Log.d("GPS статус. запущенно");
                 // do your tasks
                 break;
             case GpsStatus.GPS_EVENT_FIRST_FIX:
-                SpeechUtils.speech("GPS статус. первая фиксация",false);
+                Log.d("GPS статус. первая фиксация");
+//                SpeechUtils.speech("GPS статус. первая фиксация",false);
                 // do your tasks
                 break;
             case GpsStatus.GPS_EVENT_STOPPED:
+                Log.d("GPS статус. остановленно");
                 SpeechUtils.speech("GPS статус. остановленно",false);
                 // do your tasks
                 break;

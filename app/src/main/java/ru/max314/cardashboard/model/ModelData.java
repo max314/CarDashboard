@@ -66,8 +66,8 @@ public class ModelData {
      */
     TripSumator tripOneSumator = new TripSumator();
 
-    @Expose
-    private transient LocationVerifyListiner locationVerifyListiner = new LocationVerifyListiner();
+//    @Expose
+//    private transient LocationVerifyListiner locationVerifyListiner = new LocationVerifyListiner();
 
     private String BTAddress ="";
 
@@ -93,7 +93,7 @@ public class ModelData {
         this.tripOneSumator.addFromLocation(currentLocation);
         this.tripStartSumator.addFromLocation(currentLocation);
         this.tripTodaySumator.addFromLocation(currentLocation);
-        this.locationVerifyListiner.addFromLocation(currentLocation);
+//        this.locationVerifyListiner.addFromLocation(currentLocation);
     }
 
     /***
@@ -165,9 +165,9 @@ public class ModelData {
         return tripOneSumator;
     }
 
-    public LocationVerifyListiner getLocationVerifyListiner() {
-        return locationVerifyListiner;
-    }
+//    public LocationVerifyListiner getLocationVerifyListiner() {
+//        return locationVerifyListiner;
+//    }
 
     //endregion
 
